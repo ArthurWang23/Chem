@@ -1,0 +1,307 @@
+//- xy 此文件对应反应结果界面
+
+doctype html
+html
+  head
+    title= result_page  
+    meta(charset="UTF-8") 
+    meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="renderer" content="webkit") 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no") 
+    //兼容IE
+    meta(http-equiv="X-UA-Compatible" content="IE=edge" ) 
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8") 
+    meta(http-equiv="Content-Type" content="text/html; charset=gb2312") 
+    meta(name="keywords" content="Highc") 
+    meta(name="description" content="Highcharts") 
+
+    link(rel="stylesheet" href="/Lib/bootstrap5/bootstrap.min.css")
+    link(rel="stylesheet" href='/Lib/chemLib/css/resultpage_styles.css')
+    link(rel="stylesheet" href="/Lib/node_modules/jquery-confirm/css/jquery-confirm.css")
+
+    style. 
+      body{
+      background-image: url('/images/bg_lib/bg6.jpg');   //背景图 
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      //字体颜色大小
+      color: white;                                       
+      font-size: 20px;                                    
+      }
+      .echartContainer{
+        display:relative;
+      }
+      #footer{
+        text-align: center;
+        color: white;
+        font-size: 10px;
+      }
+   
+  body
+    //- 导航栏
+    div.nav.navbar.navbar-expand-lg.navbar-dark.fixed-top(style='background-color: #366cb4;')    
+        .container-fluid
+          a.navbar-brand(href='#')
+            img.d-inline-block.align-text-center(src='/images/ecnu_logo2.png' alt='' width='30' height='30')
+            |  Totally Automatic Optimist
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.nav-pills.collapse.navbar-collapse       
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0
+              li.nav-item
+                a.nav-link(href='/index') Home
+              li.nav-item
+                a.nav-link(href='/AI') Retrosynthetic Analysis
+              li.nav-item
+                a.nav-link(href='/processing') Run Platform
+              li.nav-item
+                a.nav-link.active(aria-current='page' href='/result') Experimental Results
+              //- 数据库下拉选项
+              li.nav-item.dropdown
+                a#navbarDropdown1.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+                  | Database
+                ul.dropdown-menu(aria-labelledby='navbarDropdown1')
+                  li
+                    a.dropdown-item(href='/database1') Database1
+                  li
+                    a.dropdown-item(href='/database2') Database2
+              //- //- 视频监控下拉选项
+              //- li.nav-item.dropdown
+              //-   a#navbarDropdown2.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+              //-     | 视频监控
+              //-   ul.dropdown-menu(aria-labelledby='navbarDropdown2')
+              //-     li
+              //-       a.dropdown-item(href='/camera1') 视频监控1
+              //-     li
+              //-       a.dropdown-item(href='/camera2') 视频监控2
+              li.nav-item
+                a.nav-link(href='/camera') Video Surveillance
+            a(href='/logout')
+              button.btn.btn-success.position-absolute.top-50.end-0.translate-middle(type = 'button')
+                | &nbsp Exit &nbsp &nbsp &nbsp
+
+    //- 概要表格     
+    //- div(style='display:flex;') 
+    //-   table#resultTable1.table(style='margin:auto; margin-top:4rem;  width:80%; text-align:center;')
+    //-     tbody(style='color: white;')
+    //-       tr(style=' height:50px; font-weight:bold;')
+    //-         td 模式
+    //-         td 开始时间
+    //-         td 结束时间
+    //-         td 利多卡因产率
+    //-         td 地西泮产率
+    //-       tr(style='height:50px;')
+    //-         td#T1_1 
+    //-         td#T1_2
+    //-         td#T1_3
+    //-         td#T1_4
+    //-         td#T1_5
+    //- div(style='display:flex;') 
+    //-   table#resultTable1.table(style='margin:auto; margin-top:4rem;  width:80%; text-align:center;')
+    //-     tbody(style='color: white;')
+    //-       tr(style=' height:10px; font-weight:bold;')
+    //-         td(rowspan='2' style='vertical-align: middle;') 模式
+    //-         td(rowspan='2' style='vertical-align: middle;') 开始时间
+    //-         td(rowspan='2' style='vertical-align: middle;') 结束时间
+    //-         td(colspan='2') 产率
+    //-       tr(style=' height:10px;')
+    //-         td 利多卡因
+    //-         td 地西泮
+    //-       tr(style='height:40px;')
+    //-         td#T1_1 
+    //-         td#T1_2
+    //-         td#T1_3
+    //-         td#T1_4
+    //-         td#T1_5
+    div(style='display:flex;') 
+      table#resultTable1.table(style='margin:auto; margin-top:4rem;  width:80%; text-align:center;')
+        tbody(style='color: white;')
+          tr(style=' height:25px; font-weight:bold;')
+            td(style='vertical-align: middle;')  Experimental Results
+            td(style='vertical-align: middle;') Lab staff
+            td(style='vertical-align: middle;') Reagent
+            td(style='vertical-align: middle;') Concentration/%
+            td(style='vertical-align: middle;') Velocity
+            td(style='vertical-align: middle;') Reaction temperature/℃
+            td(style='vertical-align: middle;') Reaction volume/mL
+            td(style='vertical-align: middle;') Reaction time/s
+            td(style='vertical-align: middle;') Yield/%
+            td(style='vertical-align: middle;') Conversion/%
+          //- tr(style=' height:10px;')
+          //-   td 利多卡因
+          //-   td 地西泮
+          tr(style='height:25px;')
+            td
+              input#ExperimentalPeriod(type='text' name='1' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#Experimenter(type='text' name='2' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#ReagentName(type='text' name='3' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#Concentration(type='text' name='4' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#FlowVelocity(type='text' name='5' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#ReactorTemperature(type='text' name='1' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#ReactorVolume(type='text' name='2' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#ReactionTime(type='text' name='3' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#ProductivityRate(type='text' name='4' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+            td
+              input#PercentConversion(type='text' name='5' placeholder='input...' style='width: 80%; box-sizing: border-box;')
+          //- tr(style='height:25px;')
+            td#T1_6 
+            td#T1_7
+            td#T1_8
+            td#T1_9
+            td#T1_10
+    //- 保存结果按钮
+    button.btn.btn-danger.btn-large(type='button',style='position:absolute; top:7rem; right:4rem;',onclick='InsertNewData()')  Save
+    
+    //- 自动模式配方表格
+    //- div#resultTable2Container(style='margin-left:4rem; margin-top:1rem; display:none; ') 
+    //-   //- table(width='40%' border='0' cellspacing='0' cellpadding='0' style='width:40%;')
+    //-   //-   tbody
+    //-   //-     tr
+    //-   //-       td.biaoti(align='center' height='60') 配方明细表
+    //-   table#resultTable2.tabtop13(width='40%' border='0' cellspacing='1' cellpadding='4' bgcolor='#cccccc' style='width:40%; height:80%; ')
+    //-     tbody.text-center
+    //-       tr
+    //-         td.btbg.font-center.titfont(colspan='2' rowspan='2')  
+    //-         td.btbg.font-center.titfont(width='10%' rowspan='2') 底物
+    //-         td.btbg.font-center.titfont(width='10%' rowspan='2') 流速(μl/min)
+    //-         td.btbg.font-center.titfont(width='10%' rowspan='2') 状态
+    //-       tr
+    //-       tr
+    //-         td.btbg1.font-center(width='7%' rowspan='7') 泵
+    //-         td.btbg2(width='7%') 泵1
+    //-         //- 使用cell.innerHTML = "新的内容";修改内容，cell是getelementbyid()获得的
+    //-         td#T2_1_1.btbg3  
+    //-         td#T2_1_2.btbg3  
+    //-         td#T2_1_3.btbg3  
+    //-       tr
+    //-         td.btbg2 泵2
+    //-         td#T2_2_1.btbg3  
+    //-         td#T2_2_2.btbg3  
+    //-         td#T2_2_3.btbg3  
+    //-       tr
+    //-         td.btbg2 泵3
+    //-         td#T2_3_1.btbg3  
+    //-         td#T2_3_2.btbg3  
+    //-         td#T2_3_3.btbg3  
+    //-       tr
+    //-         td.btbg2 泵4
+    //-         td#T2_4_1.btbg3  
+    //-         td#T2_4_2.btbg3  
+    //-         td#T2_4_3.btbg3  
+    //-       tr
+    //-         td.btbg2 泵5
+    //-         td#T2_5_1.btbg3  
+    //-         td#T2_5_2.btbg3  
+    //-         td#T2_5_3.btbg3  
+    //-       tr
+    //-         td.btbg2 泵6
+    //-         td#T2_6_1.btbg3  
+    //-         td#T2_6_2.btbg3  
+    //-         td#T2_6_3.btbg3  
+    //-       tr
+    //-         td.btbg2 泵7
+    //-         td#T2_7_1.btbg3  
+    //-         td#T2_7_2.btbg3  
+    //-         td#T2_7_3.btbg3  
+    //-       tr
+    //-         td.btbg.font-center.titfont(colspan='2' rowspan='2')  
+    //-         td.btbg.font-center.titfont(width='10%' rowspan='2') 容量(ml)
+    //-         td.btbg.font-center.titfont(width='10%' rowspan='2') 预定温度(℃)
+    //-         td.btbg.font-center.titfont(width='10%' rowspan='2') 加热速度(档)
+    //-       tr
+    //-       tr
+    //-         td.btbg1.font-center(width='7%' rowspan='3') 芯片
+    //-         td.btbg2(width='7%') 芯片1
+    //-         td#T2_8_1.btbg3  
+    //-         td#T2_8_2.btbg3  
+    //-         td#T2_8_3.btbg3  
+    //-       tr
+    //-         td.btbg2 芯片2
+    //-         td#T2_9_1.btbg3  
+    //-         td#T2_9_2.btbg3  
+    //-         td#T2_9_3.btbg3  
+    //-       tr
+    //-         td.btbg2 芯片3
+    //-         td#T2_10_1.btbg3  
+    //-         td#T2_10_2.btbg3  
+    //-         td#T2_10_3.btbg3  
+    //-       tr
+    //-         td.btbg.font-center.titfont(colspan='2' rowspan='2')  
+    //-         td.btbg.font-center.titfont(width='10%' rowspan='2') 通道
+    //-         td.btbg.font-center.titfont 
+    //-         td.btbg.font-center.titfont
+    //-       tr
+    //-       tr
+    //-         td.btbg1.font-center(width='7%' rowspan='7') 切换阀
+    //-         td.btbg2(width='7%') 切换阀1
+    //-         td#T2_11_1.btbg3  
+    //-         td.btbg3 
+    //-         td.btbg3
+    //-       tr
+    //-         td.btbg2 切换阀2
+    //-         td#T2_12_1.btbg3  
+    //-         td.btbg3 
+    //-         td.btbg3
+    //-       tr
+    //-         td.btbg2 切换阀3
+    //-         td#T2_13_1.btbg3  
+    //-         td.btbg3 
+    //-         td.btbg3
+    div.container#resultTable2Container(style='margin-left:4rem; margin-top:1rem; display:none;')
+      .card.bg-dark.text-white(style="width:35rem; height:37rem;")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77); color:#366cb4; font-weight:bold;")
+          | Experimental Formulation
+        //mx-auto用于将图片居中 
+        .card-body.text-center(style="font-size:15px;max-height: 35rem; overflow-y: auto;") 
+          table#resultTable2.table.table-dark.table-hover(style='margin:auto; color:white;')
+            tr(style='font-weight:bold;')
+              td 
+        .card-footer
+
+
+    //- 手动模式设置记录表格
+    div.container#resultTable3Container(style='margin-left:4rem; margin-top:1rem; display:none;')
+      .card.bg-dark.text-white(style="width:35rem; height:37rem;")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77); color:#366cb4; font-weight:bold;")
+          | Operating Record
+        //mx-auto用于将图片居中 
+        .card-body.text-center(style="font-size:15px;max-height: 35rem; overflow-y: auto;") 
+          table#resultTable3.table.table-dark.table-hover(style='margin:auto; color:white;')
+            tr(style='font-weight:bold;')
+              td Time
+              td &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspOperation Details&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | Thousands of road safety first.  
+
+
+    //- 压力和温度曲线
+    div.echartContainer#echartDom(style='display:none')
+      div#PressureEchartDom(style='width:50rem; height:180px; position:absolute; top:14rem; right:4rem;') 
+
+      div#TempretureEchartDom(style='width:50rem; height:180px; position:absolute; top:27rem; right:4rem;')
+    
+    //- 谱图
+    img#img_putu(alt='暂无分析谱图' style='display:none; width:600px; height:200px;  position:absolute; top:39rem; right:9rem; ')
+
+
+    #footer.footer.position-fixed.bottom-0.start-50.translate-middle-x
+      //p ECNU & ECUST © 2023 &nbsp;&nbsp;&nbsp; Designed By Xiang and Jiang
+
+
+
+  script(src="/Lib/bootstrap5/bootstrap.bundle.min.js")
+  script(src="/Lib/jQuery3_7_1/node_modules/jquery/dist/jquery.min.js")
+  script(src="/Lib/echarts-5.3.3/dist/echarts.js")
+  script(src="Lib/node_modules/jquery-confirm/js/jquery-confirm.js") 
+  script(src="/javascripts/resultpage_jqueryfunc.js")  
+  

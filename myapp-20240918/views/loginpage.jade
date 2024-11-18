@@ -1,0 +1,187 @@
+//- xy 此文件对应用户登录登出界面
+
+doctype html
+html
+  head
+    title= Log_page  
+    meta(charset="UTF-8") 
+    meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="renderer" content="webkit") 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no") 
+    //兼容IE
+    meta(http-equiv="X-UA-Compatible" content="IE=edge" ) 
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8") 
+    meta(http-equiv="Content-Type" content="text/html; charset=gb2312") 
+    meta(name="keywords" content="Highc") 
+    meta(name="description" content="Highcharts") 
+
+    link(rel="stylesheet" href="/Lib/bootstrap5/bootstrap.min.css")
+    link(rel="stylesheet" href="/Lib/sweetalert2/dist/sweetalert2.min.css")
+    link(rel="stylesheet" href="/Lib/node_modules/jquery-confirm/css/jquery-confirm.css")
+
+    style. 
+      body{
+      background-image: url('/images/bg_lib/bg6.jpg');   //背景图 
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      //字体颜色大小
+      color: white;                                       
+      font-size: 20px;                                    
+      }
+      #LoginContainer{
+        color: white;
+        width: 30%;
+        margin:auto;
+        height: 500px;
+      }
+      #footer{
+        text-align: center;
+        color: white;
+        font-size: 10px;
+      }
+    //- script. 
+    //-   function ShowAggrement(){
+    //-     swal.fire('协议：--------')
+    //-   }
+  body
+    //- 导航栏
+    div.nav.navbar.navbar-expand-lg.navbar-dark.fixed-top(style='background-color: #366cb4;')    
+        .container-fluid
+          a.navbar-brand(href='#')
+            img.d-inline-block.align-text-center(src='/images/ecnu_logo2.png' alt='' width='30' height='30')
+            |  Totally Automatic Optimist
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.nav-pills.collapse.navbar-collapse       
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0
+              li.nav-item
+                a.nav-link(href='/') Home
+              li.nav-item
+                a.nav-link.disabled(href='/AI') Retrosynthetic Analysis
+              li.nav-item
+                a.nav-link.disabled(href='/processing') Run Platform
+              li.nav-item
+                a.nav-link.disabled(href='/result') Experimental Results
+              //- 数据库下拉选项
+              li.nav-item.dropdown
+                a#navbarDropdown1.nav-link.dropdown-toggle.disabled(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+                  | Database
+                ul.dropdown-menu(aria-labelledby='navbarDropdown1')
+                  li
+                    a.dropdown-item(href='/database1') Database1
+                  li
+                    a.dropdown-item(href='/database2') Database 2
+              //- //- 视频监控下拉选项
+              //- li.nav-item.dropdown
+              //-   a#navbarDropdown2.nav-link.dropdown-toggle.disabled(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+              //-     | 视频监控
+              //-   ul.dropdown-menu(aria-labelledby='navbarDropdown2')
+              //-     li
+              //-       a.dropdown-item(href='/camera1') 视频监控1
+              //-     li
+              //-       a.dropdown-item(href='/camera2') 视频监控2
+              li.nav-item
+                a.nav-link.disabled(href='/camera') 视频监控
+            //- a(href='/Login')
+            //-   button.btn.btn-primary.position-absolute.top-50.end-0.translate-middle(type = 'button')
+            //-     | &nbsp 退出 &nbsp &nbsp &nbsp
+    br
+    br
+    br
+    br
+    //- //- 登陆表单
+    //- #LoginContainer.container.form
+    //-   .mb-3
+    //-     label.form-label(for='exampleInputAccount1') 用户名
+    //-     input#exampleInputAccount1.form-control(type='text', aria-describedby='AccountHelp')
+    //-     #AccountHelp.form-text 注意：用户名区分大小写.
+    //-   .mb-3
+    //-     label.form-label(for='exampleInputPassword1') 密码
+    //-     input#exampleInputPassword1.form-control(type='password')
+    //-   //- .mb-3.form-check
+    //-   //-   input#exampleCheck1.form-check-input(type='checkbox')
+    //-   //-   label.form-check-label(for='exampleCheck1') Check me out
+    //-   button.btn.btn-primary(type='submit') 登陆
+
+    //- 登陆表单
+    //- #LoginContainer.container.form
+    //-   .mb-3
+    //-     label.form-label(for='exampleInputAccount1') 用户名
+    //-     input#exampleInputAccount1.form-control(type='text' value="Admin" aria-describedby='AccountHelp' required='')
+    //-     #AccountHelp.form-text 注意：用户名区分大小写.
+    //-   .mb-3
+    //-     label.form-label(for='exampleInputPassword1') 密码
+    //-     input#exampleInputPassword1.form-control(type='password' required='')
+    //-   //- .mb-3.form-check
+    //-   //-   input#exampleCheck1.form-check-input(type='checkbox')
+    //-   //-   label.form-check-label(for='exampleCheck1') Check me out
+    //-   button.btn.btn-primary(type='submit') 登陆
+
+    //- #LoginContainer.container 
+    //-   form.was-validated(action='')
+    //-     .form-group
+    //-       label(for='uname') 用户名:
+    //-       input#uname.form-control(type='text' value="Admin" placeholder='Enter username' name='uname' required='')
+    //-       //- .valid-feedback 验证成功！
+    //-       //- .invalid-feedback 请输入用户名！
+    //-     br
+    //-     .form-group
+    //-       label(for='pwd') 密码:
+    //-       input#pwd.form-control(type='password' placeholder='Enter password' name='pswd' required='')
+    //-       //- .valid-feedback 验证成功！
+    //-       //- .invalid-feedback 请输入密码！
+    //-     br
+    //-     .form-group.form-check
+    //-       label.form-check-label
+    //-         input.form-check-input.md-3(type='checkbox' name='agreement' required='')
+    //-         |  同意协议
+    //-         //- .valid-feedback 验证成功！
+    //-         //- .invalid-feedback.md-3 须同意协议方可登陆
+    //-     br
+    //-     button.btn.btn-primary(type='submit') 登陆
+    
+    #LoginContainer.container 
+      .row 
+        .col-md-12.col-md-offset-2.text
+          h1 
+            | System Login
+          .description(style='color:gray')
+            p The functionality of this system is permission-based,therefore initial login is required to access additional features
+      .row 
+        .col-md-12.col-md-offset-3
+          form#loginForm.was-validated(action='')
+            .form-group
+              label.src-oly(for='uname') User name:
+              input#uname.form-username.form-control(type='text' value="Admin" placeholder='Enter username' name='uname' required='required')
+              //- .valid-feedback 验证成功！
+              //- .invalid-feedback 请输入用户名！
+            br
+            .form-group
+              label.src-only(for='pwd') Password:
+              input#pwd.form-password.form-control(type='password' placeholder='Enter password' name='pswd' required='required')
+              //- .valid-feedback 验证成功！
+              //- .invalid-feedback 请输入密码！
+            //- br
+            //- .form-group.form-check
+            //-   label.form-check-label
+            //-     input.form-check-input.md-3(type='checkbox' name='agreement' required='')
+            //-     |  同意协议
+            //-     //- .valid-feedback 验证成功！
+            //-     //- .invalid-feedback.md-3 须同意协议方可登陆
+            br
+            button#loginBtn.btn.btn-primary Log in
+
+    
+    #footer.footer.position-fixed.bottom-0.start-50.translate-middle-x
+      //p ECNU & ECUST © 2023 &nbsp;&nbsp;&nbsp; Designed By Xiang and Jiang
+
+
+
+  script(src="/Lib/bootstrap5/bootstrap.bundle.min.js")
+  script(src="/Lib/sweetalert2/dist/sweetalert2.min.js")
+  script(src="/Lib/jQuery3_7_1/node_modules/jquery/dist/jquery.min.js")
+  script(src="Lib/node_modules/jquery-confirm/js/jquery-confirm.js")  
+  script(src="/javascripts/loginout_jqueryfunc.js")  
+  

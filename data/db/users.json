@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "5aed971de208bd4c67be69a5"
+  },
+  "username": "admin",
+  "pwd": "admin",
+  "FingerAuthed": "true",
+  "fingerOn": true,
+  "userIp": "172.1.1.64"
+}]

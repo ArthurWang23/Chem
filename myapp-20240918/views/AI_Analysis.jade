@@ -1,0 +1,329 @@
+//- xy 此文件对应AI逆合成分析界面
+
+doctype html
+html
+  head
+    title= camera1_page  
+    meta(charset="UTF-8") 
+    meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="renderer" content="webkit") 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no") 
+    //兼容IE
+    meta(http-equiv="X-UA-Compatible" content="IE=edge") 
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8") 
+    meta(http-equiv="Content-Type" content="text/html; charset=gb2312") 
+    meta(name="keywords" content="High") 
+    meta(name="description" content="Highcharts") 
+
+    link(rel="stylesheet" href="/Lib/bootstrap5/bootstrap.min.css")
+    link(rel="stylesheet" href="/Lib/fontawesome/css/all.min.css") 
+    link(rel="stylesheet" href="/Lib/node_modules/jquery-confirm/css/jquery-confirm.css")  
+    link(rel='stylesheet', href='http://localhost:port/node_modules/vis-network/styles/vis-network.min.css')
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/jspanel.css")
+    
+    style. 
+      body{
+      background-image: url('/images/bg_lib/bg6.jpg');   
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      //字体颜色大小
+      color: white;                                       
+      font-size: 20px;                                    
+      }
+      .AIPageHeader{
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      input[type="text"] {  
+            //设置输入框背景色为浅蓝色   
+            background-color: lightblue;  
+            //设置输入框字体颜色为黑色 
+            color: black;  
+      } 
+      #footer{
+        text-align: center;
+        color: white;
+        font-size: 10px;
+      }
+      canvas{
+        border: 1px solid white;
+        display: bolck;
+        background: white;
+        position: auto ;
+        margin-left: 0px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .vis-image {
+        width: 30px;
+        height: 30px;
+      }
+      .vis-network {
+        position: auto ;
+        top: 0;
+        left: 0;
+        width:1100px
+      }
+      body, html {
+            height: 100%;
+            margin: 0;
+            //- overflow: hidden; /* 禁止页面滚动 */
+        }
+    //- style(type='text/css').
+    //-   #imageContainer1 
+    //-   width: 100rem;
+    //-   height: 100rem;
+    //-   border: 10px solid lightgray;
+      <!-- 引入 jQuery 库 -->
+    
+  body
+    //- 导航栏
+    div.nav.navbar.navbar-expand-lg.navbar-dark.fixed-top(style='background-color: #366cb4;')    
+        .container-fluid
+          a.navbar-brand(href='#')
+            img.d-inline-block.align-text-center(src='/images/ecnu_logo2.png' alt='' width='30' height='30')
+            |  Totally Automatic Optimist
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.nav-pills.collapse.navbar-collapse       
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0
+              li.nav-item 
+                a.nav-link(href='/index') 项目介绍
+              li.nav-item
+                a.nav-link.active(aria-current='page' href='/AI') AI逆合成分析
+              li.nav-item
+                a.nav-link(href='/processing') 拓扑映射
+              li.nav-item
+                a.nav-link(href='/result') 实验结果
+              //- 数据库下拉选项
+              li.nav-item.dropdown
+                a#navbarDropdown1.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+                  | 数据库
+                ul.dropdown-menu(aria-labelledby='navbarDropdown1')
+                  li
+                    a.dropdown-item(href='/database1') 数据库1
+                  li
+                    a.dropdown-item(href='/database2') 数据库2
+              //- //- 视频监控下拉选项
+              //- li.nav-item.dropdown
+              //-   a#navbarDropdown2.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+              //-     | 视频监控
+              //-   ul.dropdown-menu(aria-labelledby='navbarDropdown2')
+              //-     li
+              //-       a.dropdown-item(href='/camera1') 视频监控1
+              //-     li
+              //-       a.dropdown-item(href='/camera2') 视频监控2
+              li.nav-item
+                a.nav-link(href='/camera') 视频监控
+
+            a(href='/logout')
+              button.btn.btn-success.position-absolute.top-50.end-0.translate-middle(type = 'button')
+                | &nbsp 退出 &nbsp &nbsp &nbsp
+
+     
+    //- AI功能界面     
+    .container-fluid(style='margin-left:2rem;width:98%') 
+      .row(style='display: flex; overflow-y:auto;')
+        div.col-sm-2.5(style='margin-left: 10px;margin-top:7rem;position:fixed;')
+          .d-flex.align-items-start(style='padding-left: 15px;margin-left: 20px;')
+            //-左侧导航栏
+            #v-pills-tab.nav.flex-column.nav-tabs.me-3(role='tablist' aria-orientation='vertical' style='font-size:15px;  width:320px;')
+              button#v-pills-home-tab.nav-link.active(data-bs-toggle='pill' data-bs-target='#InteractivePathPlanerPage' type='button'  role='tab' aria-controls='v-pills-home' aria-selected='true' style='font-weight: bold;' class='{ active: isPageActive("InteractivePathPlanerPage") }') 单步逆合成分析
+              button#v-pills-profile-tab.nav-link(data-bs-toggle='pill' data-bs-target='#MultistepRetrosynthesisPage' type='button'  role='tab' aria-controls='v-pills-profile' aria-selected='false' style='font-weight: bold;' class='{ active: isPageActive("MultistepRetrosynthesisPage") }') 多步逆合成路线规划
+              button#v-pills-messages-tab.nav-link(data-bs-toggle='pill' data-bs-target='#ReactionCondition' type='button'  role='tab' aria-controls='v-pills-messages' aria-selected='false' style='font-weight: bold;' class='{ active: isPageActive("ReactionCondition") }') 反应条件预测
+          div.shadow-lg.p-3.mb-5(style='display: flex; margin-top: 20px; margin-left: 28px; overflow: auto; flex-wrap: wrap; flex-direction: column; max-width: 255px; max-height: 350px; background-color: lightgray; border-radius: 15px;width: 100%; height: 100%;')
+            .item(style='flex: 0 0 auto; margin-right: 10px; margin-bottom: 10px;font-size: 20px;color: black;font-weight:bold')
+              | Configures
+            .item(style='flex: 0 0 auto; margin-right: 10px; margin-bottom: 10px;font-size: 18px;color: black;')
+              | model type 
+              .container-wrapper(style='display: flex; align-items: center; justify-content: flex-start;')
+                span(style='margin-left: 25px; font-size: 15px;')
+                .form-check
+                  input.form-check-input(type='radio', name='exampleRadios', id='exampleRadios1', value='option1', checked)
+                  label.form-check-label(for='exampleRadios1'  style='font-size: 16px; font-style: italic;') Templete 
+                span(style='margin-left: 30px; font-size: 15px; ')
+                .form-check
+                  input.form-check-input(type='radio', name='exampleRadios', id='exampleRadios2', value='option2')
+                  label.form-check-label(for='exampleRadios2' style='font-size: 16px; font-style: italic;') AI
+            .item(style='flex: 0 0 auto; margin-right: 10px; margin-bottom: 10px;font-size: 18px;color: black;')
+              | w/wo reaction conditon
+              .container-wrapper(style='display: flex; justify-content: flex-start;flex-direction: column; margin-left: 22px')
+                span(style='margin-left: 25px; font-size: 15px;')
+                .form-check
+                  input.form-check-input(type='radio', name='exampleRadios1', id='exampleRadios3', value='option3', checked)
+                  label.form-check-label(for='exampleRadios3'  style='font-size: 16px; font-style: italic;') with conditions
+                span(style='margin-left: 30px; font-size: 15px; ')
+                .form-check
+                  input.form-check-input(type='radio', name='exampleRadios1', id='exampleRadios4', value='option4')
+                  label.form-check-label(for='exampleRadios4' style='font-size: 16px; font-style: italic;') without conditions
+            .item(style='flex: 0 0 auto; margin-right: 10px; margin-bottom: 10px;font-size: 18px;color: black;')
+              | rank
+              .input-group.input-group-sm.mb-3
+                span.input-group-text(id="inputGroup-sizing-sm" style="color: #008bff;font-size: 16px;font-style: italic") top
+                input.form-control(id='topinput' ,type="text",aria-label="Sizing example input", aria-describedby="inputGroup-sizing-sm")
+           //- .container(style='display: flex; flex-direction: column; margin: 20px;')
+          //-   .d-flex.align-items-center.m-2(style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#collapsibleContainer" aria-expanded="false" aria-controls="collapsibleContainer")
+          //-     span.text-white.arrow-icon
+          //-       i.fas.fa-chevron-down
+          //-     label.form-label(style="font-weight: 200; color: white;") Target Molecule
+          //-   .collapse(id="collapsibleContainer")
+          //-     div#target_molecule_view(style="min-height: 50px;  width: 180px; height: 150px;background-color:white ;display: grid; place-items: center;margin-left: 0px")
+          //-   .d-flex.align-items-center.m-2(style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#collapsibleContainer2" aria-expanded="false" aria-controls="collapsibleContainer2")
+          //-     span.text-white.arrow-icon
+          //-       i.fas.fa-chevron-down
+          //-     label.form-label(style="font-weight: 200; color: white;") Selected Molecule
+          //-   .collapse(id="collapsibleContainer2")
+          //-     div#selected_molecule_view(style="min-height: 50px;  width: 180px; height: 150px;background-color:white ;display: grid; place-items: center;margin-left: 0px") 
+
+        .div(style='flex-grow: 1;')#content1
+          div.col-sm-8(style='margin-left: 260px')
+            .container(style='margin-top:7rem; margin-left=200px;')
+              #v-pills-tabContent.tab-content(style='width:100%; margin-left: 50px')
+                #InteractivePathPlanerPage.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='v-pills-home-tab' style='color:white ' )
+                  //- 功能界面顶部的输入框和按钮
+                  h1.AIPageHeader(style='margin-left: 50px;') 单步逆合成分析 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                  .container(style='display:flex;margin-left: 130px;margin-top: 20px')
+                    button.btn.btn-secondary(type='button' data-bs-toggle='tooltip' style='align-items: left; ' data-bs-placement='bottom' title='Connection to NIH nameresolver is OFF structureswill NOT be sent to anexternal service. Targetquery must be a SMILESstring. This can be turnedon in the settings menu, orby clicking this icon.')
+                      i.far.fa-lightbulb
+                    input#inputSmiles(type="text" placeholder="input SMILES" style='width:50%; font-size:15px')
+                    button#StartProgressBtn.btn.btn-success(style='margin-left: 0rem;' onclick='StartProcess_1()')
+                      i.far.fa-caret-square-right
+                    button#StartProgressBtn.btn.btn-warning(style='margin-left: 2rem; color:white;onclick=CRF()')
+                      i.fa.fa-sitemap
+                    //- button.btn.btn-warning(type='button' style='color:white ;display:inline; margin-left: 2rem;' data-bs-toggle='modal' data-bs-target='#exampleModal' onclick='test()') 
+                    //-   i.fa.fa-sitemap
+                  .container2(style='display:flex; margin: 10px;')
+                  .container.mt-2
+                    .row
+                      .col-md-2
+                        #Progress.progess(style='display:none ; height:10px; font-size:10px' )
+                          span#ProgressPercentage
+                          #ProgressBar.progress-bar.progress-bar-striped.bg-success(role='progressbar' style='width:0%; height:100%; margin-top:2px' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100') 
+                
+                  .container-wrapper(style='display: flex; width:100%;overflow-y:auto;')  
+                    .container3#ketchercontainer(style='display: flex; flex-direction: column;margin-left: 150px;margin-top: 50px;with:100%')
+                      div(style='display: flex; align-items: center;')  
+                        button1#StartProgressBtn.btn.btn-success(style='margin-left: 80px; width: 30px; height: 30px; margin-bottom: 10px;display: flex; align-items: center; justify-content: center;' onclick='startsubmit()')
+                          i.far.fa-caret-square-down  
+                        .intro(class="intro" style="font-size: 15px; color: grey;margin-left: 5px") 获取smiles的结构式
+                        span(style='margin-left: 10px; font-size: 15px; ') 
+                        button2#StartProgressBtn.btn.btn-success(style='margin-left: 100px; width: 30px; height: 30px; margin-bottom: 10px;display: flex; align-items: center; justify-content: center;' onclick='startsubmit1()')
+                          i.far.fa-caret-square-down  
+                        .intro(class="intro" style="font-size: 15px; color: grey;margin-left: 5px") 获取结构式的smiles表
+                      iframe#ketcherframe(src='/ketcher-standalone-2.18.0/standalone/index.html', height="500",width ="800",max-width ="100%", frameborder="0", allowfullscreen, style='margin-left: 500px, ')       
+                       
+                #MultistepRetrosynthesisPage.tab-pane.fade(role='tabpanel' aria-labelledby='v-pills-profile-tab' style='color:white')
+                  h2.AIPageHeader(style='margin-left: 60px;') 多步逆合成路线规划 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                  .container#multi1(style='display:flex;margin-left: 130px;margin-top: 20px')
+                    button.btn.btn-secondary(type='button' data-bs-toggle='tooltip' style='align-items: left; ' data-bs-placement='bottom' title='Connection to NIH nameresolver is OFF structureswill NOT be sent to anexternal service. Targetquery must be a SMILESstring. This can be turnedon in the settings menu, orby clicking this icon.')
+                      i.far.fa-lightbulb
+                    input#inputSmiles2(type="text" placeholder="请输入 SMILES" style='width:50%; font-size:15px')
+                    button#StartProgressBtn.btn.btn-success(style='margin-left: 0rem;' onclick='StartProcess_2()')
+                      i.far.fa-caret-square-right
+                    button#StartProgressBtn.btn.btn-warning(style='margin-left: 2rem; color:white' onclick='CRF()')
+                      i.fa.fa-sitemap
+                  .container2(style='display:flex; margin-left: 130px;') 
+                    #alertDiv.alert.alert-danger(style='display:none;margin-left: 0px;margin-top: 50px; padding: 10px;line-height:500px;height:500px; width:800px; position: fixed; background-color: #f2f2f2; color: black; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 999;justify-content: center; align-items: center;text-align: center;')
+                      | not found!!!
+
+                  
+                  .container-wrapper#multi2(style='display: flex; width:100%;overflow-y:auto;')  
+                    .container#multiketchercontainer(style='display: flex; flex-direction: column;margin-left: 150px;margin-top: 50px;with:100%')
+                      div(style='display: flex; align-items: center;')  
+                        button1#StartProgressBtn.btn.btn-success(style='margin-left: 80px; width: 30px; height: 30px; margin-bottom: 10px;display: flex; align-items: center; justify-content: center;' onclick='startsubmit2()')
+                          i.far.fa-caret-square-down  
+                        .intro(class="intro" style="font-size: 15px; color: grey;margin-left: 5px") 获取smiles的结构式
+                        span(style='margin-left: 10px; font-size: 15px; ') 
+                        button2#StartProgressBtn.btn.btn-success(style='margin-left: 100px; width: 30px; height: 30px; margin-bottom: 10px;display: flex; align-items: center; justify-content: center;' onclick='startsubmit3()')
+                          i.far.fa-caret-square-down  
+                        .intro(class="intro" style="font-size: 15px; color: grey;margin-left: 5px") 获取结构式的smiles表
+                      iframe#ketcherframemulti(src='/ketcher-standalone-2.18.0/standalone/index.html', height="500",width ="800",max-width ="100%", frameborder="0", allowfullscreen, style='margin-left: 500px, ')       
+                
+                      //- div(style='overflow-y:auto')
+                #ReactionCondition.tab-pane.fade(role='tabpanel' aria-labelledby='v-pills-messages-tab' style='color:white')
+                  h2.AIPageHeader(style='margin-left: 60px;') 反应条件预测 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                  .container#condition1(style='display:flex;margin-left: 130px;margin-top: 20px')
+                    button.btn.btn-secondary(type='button' data-bs-toggle='tooltip' style='align-items: left; ' data-bs-placement='bottom' title='Connection to NIH nameresolver is OFF structureswill NOT be sent to anexternal service. Targetquery must be a SMILESstring. This can be turnedon in the settings menu, orby clicking this icon.')
+                      i.far.fa-lightbulb
+                    input#inputSmiles3(type="text" placeholder="请输入 SMILES" style='width:50%; font-size:15px')
+                    button#StartProgressBtn.btn.btn-success(style='margin-left: 0rem;' onclick='StartProcess_3()')
+                      i.far.fa-caret-square-right
+                    button.btn.btn-warning(type='button' style='color:white ;display:inline; margin-left: 2rem;' data-bs-toggle='modal' data-bs-target='#exampleModal') 
+                      i.fa.fa-sitemap
+           
+                  .container-wrapper#condition2(style='display: flex; width:100%;overflow-y:auto;')  
+                    .container#multiketchercontainer(style='display: flex; flex-direction: column;margin-left: 130px;margin-top: 50px;with:100%')
+                      div(style='display: flex; align-items: center;')  
+                        button1#StartProgressBtn.btn.btn-success(style='margin-left: 80px; width: 30px; height: 30px; margin-bottom: 10px;display: flex; align-items: center; justify-content: center;' onclick='startsubmit4()')
+                          i.far.fa-caret-square-down  
+                        .intro(class="intro" style="font-size: 15px; color: grey;margin-left: 5px") 获取smiles的结构式
+                        span(style='margin-left: 10px; font-size: 15px; ') 
+                        button2#StartProgressBtn.btn.btn-success(style='margin-left: 100px; width: 30px; height: 30px; margin-bottom: 10px;display: flex; align-items: center; justify-content: center;' onclick='startsubmit5()')
+                          i.far.fa-caret-square-down  
+                        .intro(class="intro" style="font-size: 15px; color: grey;margin-left: 5px") 获取结构式的smiles表
+                      iframe#ketcherframecondition(src='/ketcher-standalone-2.18.0/standalone/index.html', height="500",width ="900",max-width ="100%", frameborder="0", allowfullscreen, style='margin-left: 500px, ')       
+                  
+                  .container(style='display:flex; width:100%;overflow-y:auto;flex-direction: column;margin-right: 0px;margin-top: 20px  ')  
+                    table.table.table-bordered(id='table3',style='background-color: lightgray;overflow:auto; border: lightgray; display:none;font-size: 16px; max-width:900px;  max-height:3000px;width:100%;margin-left: 130px')
+                        thead(style='border-bottom: 2px solid orange;')
+                          tr
+                            th(scope='col') #
+                            th(scope='col') product 
+                            th(scope='col') reactant
+                            th(scope='col') condition
+                            th(scope='col') score
+                        tbody.table-group-divider(id='tableBody_condition')
+                    #contextMenu.context-menu(style='border-radius: 8px;display: none;position: absolute;background-color:hsl(40,70%, 60%);border: 1px solid #ccc;padding: 5px;z-index: 9999;font-size: 14px')
+                        div(onclick="addRowBelow()") addR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ow
+                        div(onclick="deleteRow()") deleteRow
+  
+                .container(style='display:flex; width:100%;overflow-y:auto;flex-direction: column;margin-right: 0px ')            
+                    div(style='align-items: center;margin-bottom: 20px;width:1100 margin-left: 0px')
+                      #imageContainer1(style='dispay:none;left: 0px, justify-content: flex-start; align-items: flex-start;width:100%;max-width:1100px')
+                       
+                      div.vis-tooltip(style='left: 0px; top: 0px; visibility: hidden;')   
+                      //- 点击import network后显示的模态弹框
+                      #exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true' )
+
+                    table.table.table-bordered(id='table1',style='background-color: lightgray;overflow:auto; border: lightgray; display:none;font-size: 16px; max-width:1100px;  max-height:3000px;width:100%;margin-left: 0px')
+                        thead(style='border-bottom: 2px solid orange;')
+                          tr
+                            th(scope='col') #
+                            th(scope='col') step
+                            th(scope='col') score
+                            th(scope='col') product 
+                            th(scope='col') reactant
+                            th(scope='col') condition
+                            th(scope='col') react
+                            th(scope='col') templete 
+                        tbody.table-group-divider(id='tableBody')
+                .container#jsPanelContainer(style='position: absolute; left: 1300px; top: 100px; z-index:1000; width:100%; height: 100%; opacity:1;display:none;border: 0px;')    
+                    
+              a#TuopuAnalysisBtn.btn.btn-danger.btn-lg.text-center(href='/processing' style="position:absolute; margin-left:42rem; top:45rem; display:none;") 开始拓扑映射分析
+              #footer.footer.position-fixed.bottom-0.start-50.translate-middle-x
+                //- #footer.footer.fixed-bottom
+            
+                p ECNU & ECUST © 2023 &nbsp;&nbsp;&nbsp; Designed By Xiang
+            
+          
+            
+                
+          
+                
+  script(src="/Lib/bootstrap5/bootstrap.bundle.min.js") 
+  script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+    <!-- 引入 jQuery UI 库 -->
+  script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js")
+  script(src="https://cdn.jsdelivr.net/npm/jspanel4@4.15.0/dist/jspanel.js")
+  script(src="/javascripts/jspannel_note.js")
+  
+  script(src="/Lib/jQuery3_7_1/node_modules/jquery/dist/jquery.min.js")
+  script(src="Lib/node_modules/jquery-confirm/js/jquery-confirm.js") 
+  script(src="/Lib/xlsx_js/xlsx.full.min.js")
+  //- script(src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js")
+  script(src="/javascripts/ketcher.js")
+  script(src="/javascripts/aipage_jqueryfunc.js")
+  script(src='https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js')
+
+

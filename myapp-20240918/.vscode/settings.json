@@ -1,0 +1,5 @@
+{
+    "git.ignoreLimitWarning": true,
+    "compile-hero.disable-compile-files-on-did-save-code": true,
+    "editor.fontSize": 20
+}

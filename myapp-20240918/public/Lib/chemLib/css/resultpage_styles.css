@@ -1,0 +1,57 @@
+@charset "utf-8";
+/* CSS Document */
+.tabtop13 {
+	margin-top: 13px;
+}
+.tabtop13 td{
+	background-color:#2d3134;
+	height:10px;
+	line-height:150%;
+}
+.font-center{ text-align:center}
+.btbg{background:#212526 !important;}
+.btbg1{background:#212526 !important;
+	color:#366cb4;
+	font-weight: bold;
+}
+.btbg2{background:#2d3134 !important;
+	color:white;
+	font-weight: bold;
+	font-size: 15px;
+}
+.btbg3{
+	color:white;
+}
+.biaoti{
+	font-family: 微软雅黑;
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom:1px dashed #CCCCCC;
+	color: #366cb4;
+}
+.titfont {
+	
+	font-family: 微软雅黑;
+	font-size: 18px;
+	font-weight: bold;
+	color: #366cb4;
+	background: url(../images/ico3.gif) no-repeat 15px center;
+	background-color:#e9faff;
+}
+.tabtxt2 {
+	font-family: 微软雅黑;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: right;
+	padding-right: 10px;
+	color:#366cb4;
+}
+.tabtxt3 {
+	font-family: 微软雅黑;
+	font-size: 14px;
+	padding-left: 15px;
+	color: #000;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 20px;
+}

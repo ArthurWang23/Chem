@@ -1,0 +1,34 @@
+{
+  "name": "opencv",
+  "version": "7.0.0",
+  "description": "Node Bindings to OpenCV",
+  "author": "Peter Braden <peterbraden@peterbraden.co.uk>",
+  "dependencies": {
+    "buffers": "^0.1.1",
+    "nan": "^2.14.0"
+  },
+  "devDependencies": {
+    "glob": "^5.0.3",
+    "request": "^2.88.2",
+    "tape": "^3.0.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "node-gyp build",
+    "test": "node test/unit.js"
+  },
+  "keywords": [
+    "opencv",
+    "computer",
+    "vision",
+    "quadrocopter"
+  ],
+  "main": "./lib/opencv",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peterbraden/node-opencv.git"
+  },
+  "engines": {
+    "node": ">=0.12"
+  }
+}

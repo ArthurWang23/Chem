@@ -1,0 +1,141 @@
+//- xy 此文件对应视频监控1界面
+
+doctype html
+html
+  head
+    title= camera1_page  
+    meta(charset="UTF-8") 
+    meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="renderer" content="webkit") 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no") 
+    //兼容IE
+    meta(http-equiv="X-UA-Compatible" content="IE=edge" ) 
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8") 
+    meta(http-equiv="Content-Type" content="text/html; charset=gb2312") 
+    meta(name="keywords" content="Highc") 
+    meta(name="description" content="Highcharts") 
+
+    link(rel="stylesheet" href="/Lib/bootstrap5/bootstrap.min.css")
+    link(rel="stylesheet" href="/Lib/node_modules/jquery-confirm/css/jquery-confirm.css")
+
+    style. 
+      body{
+      background-image: url('/images/bg_lib/bg6.jpg');   //背景图
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      //- 字体颜色大小
+      color: white;                                       
+      font-size: 20px;                                    
+      }
+      #navbarDropdown2{
+        background-color: rgb(13,110,253);
+        color:white;
+      }
+      table{
+        width: 100%;
+        height: 100vh;
+        display: table;
+      }
+      td {
+        text-align: center;
+        vertical-align: middle;
+      }
+      video{
+        max-width: 100%;
+        max-height: 100%;
+      }
+      #footer{
+        text-align: center;
+        color: white;
+        font-size: 10px;
+      }
+
+   
+  body
+    .container 
+      .row
+        //- 导航栏
+        div.nav.navbar.navbar-expand-lg.navbar-dark.fixed-top(style='background-color: #366cb4;')    
+            .container-fluid
+              a.navbar-brand(href='#')
+                img.d-inline-block.align-text-center(src='/images/ecnu_logo2.png' alt='' width='30' height='30')
+                |  Totally Automatic Optimist
+              button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+              #navbarSupportedContent.nav-pills.collapse.navbar-collapse       
+                ul.navbar-nav.me-auto.mb-2.mb-lg-0
+                  li.nav-item
+                    a.nav-link(href='/index') Home
+                  li.nav-item
+                    a.nav-link(href='/AI') Retrosynthetic Analysis
+                  li.nav-item
+                    a.nav-link(href='/processing') Run Platform
+                  li.nav-item
+                    a.nav-link(href='/result') Experimental Results
+                  //- 数据库下拉选项
+                  li.nav-item.dropdown
+                    a#navbarDropdown1.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+                      | Database
+                    ul.dropdown-menu(aria-labelledby='navbarDropdown1')
+                      li
+                        a.dropdown-item(href='/database1') Database1
+                      li
+                        a.dropdown-item(href='/database2') Database2
+                  //- //-视频监控下拉选项
+                  //- li.nav-item.dropdown.active(background-color='rgb(13,110,253)' aria-current='page')
+                  //-   a#navbarDropdown2.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+                  //-     | 视频监控1
+                  //-   ul.dropdown-menu(aria-labelledby='navbarDropdown2')
+                  //-     li
+                  //-       a.dropdown-item(href='#') 视频监控1
+                  //-     li
+                  //-       a.dropdown-item(href='/camera2') 视频监控2
+                  li.nav-item
+                    a.nav-link.active(aria-current='page' href='/camera') Video Surveillance     
+                a(href='/logout')
+                  button.btn.btn-success.position-absolute.top-50.end-0.translate-middle(type = 'button')
+                    | &nbsp Exit &nbsp &nbsp &nbsp
+    
+    //- 视频元素，使用table来居中
+    //- 使用js原生navigator.mediaDevices.getUserMedia获取摄像头并通过video标签播放 
+    table
+      tbody  
+        tr 
+          td 
+            canvas#croppedVideo1(width='700' height='300' style='position:relative; top:80px;')
+            figcaption(style='color:white ; position:relative; top:80px;') No.1 camera screen
+        tr
+          td 
+            canvas#croppedVideo2(width='700' height='300' style='position:relative; top:0px;')
+            figcaption(style='color:white') No.2 camera screen     
+    //- table 
+    //-   tabody
+    //-     tr 
+    //-       td  
+    //-         //- 使用canvas绘制剪裁过的画面
+    //-         video#cam_input1(width='1707' height='960' style='display:block;')
+    //-         figcaption(style='color:white') 1号摄像头画面
+    //-       td
+    //-         video#cam_input2(width='978' height='550')
+    //-         figcaption(style='color:white') 2号摄像头画面
+          
+
+        
+    #footer.footer.position-fixed.bottom-0.start-50.translate-middle-x
+      //p ECNU & ECUST © 2023 &nbsp;&nbsp;&nbsp; Designed By Xiang and Jiang
+    
+    
+    
+
+  script(src="/Lib/bootstrap5/bootstrap.bundle.min.js")
+  script(src="/Lib/jQuery3_7_1/node_modules/jquery/dist/jquery.min.js")
+  script(src="/javascripts/camera1page_jqueryfunc.js")
+  script(src="Lib/node_modules/jquery-confirm/js/jquery-confirm.js")
+  //xy:异步载入opencv.js，虽然本阶段项目未用到，但后续若有需要可以直接前端视频图像处理。后端使用opencv4nodejs,环境搭建见工程文档
+  <script async src="/Lib/opencv/opencv-3.4.0.js" onload="openCvReady();"></script>
+   
+  //script(src="../routes/camera1_route.js")
+  //- script(src="/javascripts/camera1page_jqueryfunc.js") 
+  

@@ -1,0 +1,413 @@
+//- xy 此文件对应数据库1界面
+
+doctype html
+html
+  head
+    title= database1_page  
+    meta(charset="UTF-8") 
+    meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="renderer" content="webkit") 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no") 
+    //兼容IE
+    meta(http-equiv="X-UA-Compatible" content="IE=edge" ) 
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8") 
+    meta(http-equiv="Content-Type" content="text/html; charset=gb2312") 
+    meta(name="keywords" content="Highc") 
+    meta(name="description" content="Highcharts") 
+
+    link(rel="stylesheet" href="/Lib/bootstrap5/bootstrap.min.css")
+    link(rel="stylesheet" href="/Lib/node_modules/jquery-confirm/css/jquery-confirm.css")
+
+    style. 
+      body{
+      background-image: url('/images/bg_lib/bg6.jpg');   //背景图 
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      //字体颜色大小
+      color: white;                                       
+      font-size: 20px;                                    
+      }
+      #navbarDropdown1{
+        background-color: rgb(13,110,253);
+        color:white;
+      }
+      #footer{
+        text-align: center;
+        color: white;
+        font-size: 10px;
+      }
+      #pagination-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+        margin-top: 10px; 
+      }
+      #pagination button {
+        margin: 0 5px;
+      }
+   
+  body
+    //- 导航栏
+    div.nav.navbar.navbar-expand-lg.navbar-dark.fixed-top(style='background-color: #366cb4;')    
+        .container-fluid
+          a.navbar-brand(href='#')
+            img.d-inline-block.align-text-center(src='/images/ecnu_logo2.png' alt='' width='30' height='30')
+            |  Totally Automatic Optimist
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.nav-pills.collapse.navbar-collapse       
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0
+              li.nav-item
+                a.nav-link(href='/index') Home
+              li.nav-item
+                a.nav-link(href='/AI') Retrosynthetic Analysis
+              li.nav-item
+                a.nav-link(href='/processing') Run Platform
+              li.nav-item
+                a.nav-link(href='/result') Experimental Results
+              //- 数据库下拉选项
+              li.nav-item.dropdown
+                a#navbarDropdown1.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+                  | Database1
+                ul.dropdown-menu(aria-labelledby='navbarDropdown1')
+                  li
+                    a.dropdown-item(href='/database1') Database1
+                  li
+                    a.dropdown-item(href='/database2') Database2
+              li.nav-item
+                a.nav-link(href='/camera') Video Surveillance
+            a(href='/logout')
+              button.btn.btn-success.position-absolute.top-50.end-0.translate-middle(type = 'button')
+                | &nbsp Exit &nbsp &nbsp &nbsp
+              
+    //- div.container(style = "margin:auto; margin-top:5rem; display:none;")
+    //-   table.table.caption-top.table-dark.text-center.table-hover.table-striped
+    //-     //- caption.text-center
+    //-     //-   h3 人员登记表
+    //-     thead
+    //-       td  Chloroacetyl Chloride (M)
+    //-       td  Dissolvant (M)
+    //-       td  Temperature (℃)
+    //-       td  Velocity (ul/min)
+    //-       td  Time  (min)
+    //-       td  Yield (%)
+
+
+    //-     tr
+    //-       td  0.5
+    //-       td  NMP
+    //-       td  60
+    //-       td  50
+    //-       td  10   
+    //-       td  14.09
+    
+    //-     tr
+    //-       td  0.5
+    //-       td  NMP
+    //-       td  80
+    //-       td  50
+    //-       td  10   
+    //-       td  14.13
+    
+    //-     tr
+    //-       td  0.5
+    //-       td  NMP
+    //-       td  100
+    //-       td  50
+    //-       td  10   
+    //-       td  16.88
+    
+    //-     tr
+    //-       td  0.6
+    //-       td  NMP
+    //-       td  100
+    //-       td  50
+    //-       td  10   
+    //-       td  88.95
+        
+    //-     tr
+    //-       td  0.65
+    //-       td  NMP
+    //-       td  100
+    //-       td  50
+    //-       td  10   
+    //-       td  57.62
+        
+    //-     tr
+    //-       td  0.7
+    //-       td  NMP
+    //-       td  100
+    //-       td  50
+    //-       td  10   
+    //-       td  99
+        
+    //-     tr
+    //-       td  0.7
+    //-       td  DMF
+    //-       td  25
+    //-       td  25
+    //-       td  10   
+    //-       td  47.46
+           
+    //-     tr
+    //-       td  0.7
+    //-       td  DMF
+    //-       td  25
+    //-       td  50
+    //-       td  5   
+    //-       td  49.4
+                
+    //-     tr
+    //-       td  0.7
+    //-       td  C7H8
+    //-       td  25
+    //-       td  50
+    //-       td  5   
+    //-       td  84.31
+
+    //-     tr
+    //-       td  0.7
+    //-       td  NMP
+    //-       td  25
+    //-       td  50
+    //-       td  5   
+    //-       td  99
+    
+    //- div.container(style = "margin:auto; margin-top:5rem; display:none;")
+      table.table.caption-top.table-dark.text-center.table-hover.table-striped
+        thead
+          td  Diethylamine (M)
+          td  KOH (M) 
+          td  Time (min)
+          td  Temperature (℃)
+          td  Yield (%)
+
+        tr
+          td  0.4
+          td  0.15
+          td  20
+          td  40
+          td  3.71
+
+        tr
+          td  0.4
+          td  0.15
+          td  20
+          td  60
+          td  8.27
+
+        tr
+          td  0.4
+          td  0.15
+          td  20
+          td  80
+          td  18.99
+
+
+        tr
+          td  0.4
+          td  0.15
+          td  20
+          td  100
+          td  51.08
+
+
+        tr
+          td  0.4
+          td  0.15
+          td  20
+          td  120
+          td  52.79
+
+
+        tr
+          td  0.5
+          td  0.1
+          td  20
+          td  100
+          td  17.94
+
+
+        tr
+          td  0.5
+          td  0.15
+          td  20
+          td  100
+          td  22.28
+
+
+        tr
+          td  0.5
+          td  0.2
+          td  20
+          td  100
+          td  41.69
+
+
+        tr
+          td  0.5
+          td  0.3
+          td  20
+          td  100
+          td  NULL
+
+
+        tr
+          td  0.6
+          td  0.2
+          td  20
+          td  100
+          td  28.28
+
+
+        tr
+          td  0.7
+          td  0.2
+          td  20
+          td  100
+          td  31.01
+
+
+        tr
+          td  0.8
+          td  0.2
+          td  20
+          td  100
+          td  55.61
+    
+    div.container(style = "margin:auto; margin-top:5rem; ")
+      table#dataTable.table.caption-top.table-dark.text-center.table-hover.table-striped
+        thead
+          tr
+            th  Experimental Results
+            th  Lab staff
+            th  Reagent
+            th  Concentration/%
+            th  Flow rate
+            th  Reaction temperature/℃
+            th  Reaction volume/mL
+            th  Reaction time/s
+            th  Yield/%
+            th  Conversion/%
+          //- td  实验时间
+          //- td  实验人员
+          //- td  试剂名称
+          //- td  浓度
+          //- td  流速
+          //- td  反应器温度
+          //- td  反应器体积
+          //- td  反应时间
+          //- td  产率
+          //- td  转化率
+        tbody#tableBody
+
+
+        //- tr
+        //-   td#DB_1_ExperimentalPeriod
+        //-   td#DB_1_Experimenter
+        //-   td#DB_1_ReagentName
+        //-   td#DB_1_Concentration
+        //-   td#DB_1_FlowVelocity
+        //-   td#DB_1_ReactorTemperature
+        //-   td#DB_1_ReactorVolume
+        //-   td#DB_1_ReactionTime
+        //-   td#DB_1_ProductivityRate
+        //-   td#DB_1_PercentConversion
+
+        //- tr
+        //-   td#DB_2_ExperimentalPeriod
+        //-   td#DB_2_Experimenter
+        //-   td#DB_2_ReagentName
+        //-   td#DB_2_Concentration
+        //-   td#DB_2_FlowVelocity
+        //-   td#DB_2_ReactorTemperature
+        //-   td#DB_2_ReactorVolume
+        //-   td#DB_2_ReactionTime
+        //-   td#DB_2_ProductivityRate
+        //-   td#DB_2_PercentConversion
+
+        //- tr
+        //-   td#DB_3_ExperimentalPeriod
+        //-   td#DB_3_Experimenter
+        //-   td#DB_3_ReagentName
+        //-   td#DB_3_Concentration
+        //-   td#DB_3_FlowVelocity
+        //-   td#DB_3_ReactorTemperature
+        //-   td#DB_3_ReactorVolume
+        //-   td#DB_3_ReactionTime
+        //-   td#DB_3_ProductivityRate
+        //-   td#DB_3_PercentConversion
+        
+        //- tr
+        //-   td#DB_4_ExperimentalPeriod
+        //-   td#DB_4_Experimenter
+        //-   td#DB_4_ReagentName
+        //-   td#DB_4_Concentration
+        //-   td#DB_4_FlowVelocity
+        //-   td#DB_4_ReactorTemperature
+        //-   td#DB_4_ReactorVolume
+        //-   td#DB_4_ReactionTime
+        //-   td#DB_4_ProductivityRate
+        //-   td#DB_4_PercentConversion
+        
+        //- tr
+        //-   td#DB_5_ExperimentalPeriod
+        //-   td#DB_5_Experimenter
+        //-   td#DB_5_ReagentName
+        //-   td#DB_5_Concentration
+        //-   td#DB_5_FlowVelocity
+        //-   td#DB_5_ReactorTemperature
+        //-   td#DB_5_ReactorVolume
+        //-   td#DB_5_ReactionTime
+        //-   td#DB_5_ProductivityRate
+        //-   td#DB_5_PercentConversion
+              
+        //- tr
+        //-   td#DB_6_ExperimentalPeriod
+        //-   td#DB_6_Experimenter
+        //-   td#DB_6_ReagentName
+        //-   td#DB_6_Concentration
+        //-   td#DB_6_FlowVelocity
+        //-   td#DB_6_ReactorTemperature
+        //-   td#DB_6_ReactorVolume
+        //-   td#DB_6_ReactionTime
+        //-   td#DB_6_ProductivityRate
+        //-   td#DB_6_PercentConversion
+    
+        //- tr
+        //-   td#DB_7_ExperimentalPeriod
+        //-   td#DB_7_Experimenter
+        //-   td#DB_7_ReagentName
+        //-   td#DB_7_Concentration
+        //-   td#DB_7_FlowVelocity
+        //-   td#DB_7_ReactorTemperature
+        //-   td#DB_7_ReactorVolume
+        //-   td#DB_7_ReactionTime
+        //-   td#DB_7_ProductivityRate
+        //-   td#DB_7_PercentConversion
+              
+        //- tr
+        //-   td#DB_8_ExperimentalPeriod
+        //-   td#DB_8_Experimenter
+        //-   td#DB_8_ReagentName
+        //-   td#DB_8_Concentration
+        //-   td#DB_8_FlowVelocity
+        //-   td#DB_8_ReactorTemperature
+        //-   td#DB_8_ReactorVolume
+        //-   td#DB_8_ReactionTime
+        //-   td#DB_8_ProductivityRate
+        //-   td#DB_8_PercentConversion
+    #pagination-container
+    #footer.footer.position-fixed.bottom-0.start-50.translate-middle-x
+      //p ECNU & ECUST © 2023 &nbsp;&nbsp;&nbsp; Designed By Xiang and Jiang
+
+
+
+  script(src="/Lib/bootstrap5/bootstrap.bundle.min.js")
+  script(src="/Lib/jQuery3_7_1/node_modules/jquery/dist/jquery.min.js")
+  script(src="Lib/node_modules/jquery-confirm/js/jquery-confirm.js")
+  script(src="/javascripts/database1page_jqueryfunc.js") <!-- jquery函数 -->
+  
+  

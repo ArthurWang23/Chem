@@ -1,0 +1,1794 @@
+//- xy 此文件对应反应过程框图界面
+
+doctype html
+html
+  head
+    title= processing_page  
+    meta(charset="UTF-8") 
+    meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="renderer" content="webkit") 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no") 
+    //兼容IE
+    meta(http-equiv="X-UA-Compatible" content="IE=edge" ) 
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8") 
+    meta(http-equiv="Content-Type" content="text/html; charset=gb2312") 
+    meta(name="keywords" content="Highc") 
+    meta(name="description" content="Highcharts") 
+    link(rel="stylesheet" href="/Lib/bootstrap5/bootstrap.min.css")
+    link(rel="stylesheet" href="/Lib/node_modules/jquery-confirm/css/jquery-confirm.css")
+
+    style. 
+      body{
+      background-image: url('/images/bg_lib/bg6.jpg');    
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      //字体颜色大小
+      color: white;                                       
+      font-size: 20px;                                    
+      } 
+      .CanvasContainer{
+        position: absolute;
+        margin-left: 40px;
+        margin-top: 80px;
+        //- position: absolute;
+        //- margin-left: 40px;
+        //- margin-top: 8rem;
+      }
+      canvas{
+        border: 1px solid white;
+        display: bolck;
+        background: white;
+      }
+      .SysParam_CardContainer{
+        display: relative 
+      }
+      .SysParam_Card{
+        position: absolute;  
+        right: 0;  
+        //- bottom: 3rem;  
+        top: 5rem;
+        margin-right: 4rem;  
+      }
+      .Param_container{
+        display: flex;
+        align-items: left;
+        //margin-bottom: 10px;
+        //- font-size: 20px;
+        //- text-shadow: 1px 1px 1px #FFF;
+      }
+      .Param_container span{
+        margin-right: 10px;
+      }
+      .SysParamName{
+        color: rgb(13,110,253); 
+      }
+      .SettingBtns{
+        position: absolute;
+        top: 43rem;
+        right: 0;
+        margin-right: 4rem; 
+      }
+      .SettingBtnsContainer{
+        display:relative
+      }
+      .vertical-buttons {  
+        display: flex;  
+        flex-direction: column;  
+      } 
+      .ChemElemParam_CardContainer{
+        display: relative 
+      }
+      .ChemElemParam_Card{
+        position: absolute;  
+        right: 0;  
+        //- top: 5rem; 
+        top: 14rem;   
+        margin-right: 4rem;  
+      }
+      .showCardBodycontainer{
+        margin-top:0px;
+        margin-left:7rem;
+        margin-bottom:1rem;
+        text-shadow: 1px 1px 1px #FFF;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+      }
+      .showCardBodycontainer label{
+        margin: 0px 0px 1rem;
+        display: flex;
+      }
+      .showCardBodycontainer label>span{
+        float: left;
+        text-align: left;
+        padding-right: 10px;
+        font-size: 15px;
+      }
+      .setCardBodyForm{
+        margin-left:2rem;
+        //padding: 20px 30px 20px 30px;
+        text-shadow: 1px 1px 1px #FFF;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+      }
+      .setCardBodyForm label{
+        margin: 0px 0px 2px;
+        display: flex;
+      }
+      .setCardBodyForm label>span{
+        float: left;
+        text-align: left;
+        padding-right: 10px;
+        font-size: 15px;
+        //margin-top: 10px;
+        // font-weight: bold;
+        // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      .setCardBodyForm input[type="text"], .setCardBodyForm select{
+        border: 1px solid #CCC;
+        color: #888;
+        height: 25px;
+        line-height:15px;
+        margin-bottom: 16px;
+        margin-right: 6px;
+        margin-top: 2px;
+        display: flex;
+        align-items: left;
+        outline: 0 none;
+        padding: 5px 0px 5px 5px;
+        width: 55%;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+      .setCardBodyForm input[type="number"], .setCardBodyForm select{
+        border: 1px solid #CCC;
+        color: #888;
+        height: 25px;
+        line-height:15px;
+        margin-bottom: 16px;
+        margin-right: 6px;
+        margin-top: 2px;
+        display: flex;
+        align-items: left;
+        outline: 0 none;
+        padding: 5px 0px 5px 5px;
+        width: 55%;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+      .setCardBodyForm select {
+        background: #FFF url('down-arrow.png') no-repeat right;
+        background: #FFF url('down-arrow.png') no-repeat right;
+        display: flex;
+        align-items: left;
+        appearance:none;
+        -webkit-appearance:none;
+        -moz-appearance: none;
+        text-indent: 0.01px;
+        text-overflow: '';
+        width: 70%;
+        height: 25px;
+        line-height:15px;
+      }  
+      .echartContainer{
+        display:relative;
+      }
+      .uartContainer{
+        display:felx;
+      }
+      .uartInput{
+        position: absolute;  
+        left: 45rem;  
+        //- bottom: 3rem;  
+        top: 34rem;
+        margin-right: 4rem;
+      }
+      #footer{
+        text-align: center;
+        color: white;
+        font-size: 10px;
+      }
+      .node {
+        width: 120px;
+        height: 60px;
+        background-color: #6c757d;
+        color: black;
+        border-radius: 5px;
+        position: absolute;
+        text-align: center;
+        line-height: 60px;
+        border: 1px solid #5c636a;
+      }
+   
+  body
+    // 导航栏
+    div.nav.navbar.navbar-expand-lg.navbar-dark.fixed-top(style='background-color: #366cb4;')    
+        .container-fluid
+          a.navbar-brand(href='#')
+            img.d-inline-block.align-text-center(src='/images/ecnu_logo2.png' alt='' width='30' height='30')
+            |  Totally Automatic Optimist
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.nav-pills.collapse.navbar-collapse       
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0
+              li.nav-item
+                a.nav-link(href='/index') Home
+              li.nav-item
+                a.nav-link(href='/AI') Retrosynthetic Analysis
+              li.nav-item
+                a.nav-link.active(aria-current='page' href='/processing') Run Platform
+              li.nav-item
+                a.nav-link(href='/result') Experimental Results
+              //- 数据库下拉选项
+              li.nav-item.dropdown
+                a#navbarDropdown1.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+                  | Database
+                ul.dropdown-menu(aria-labelledby='navbarDropdown1')
+                  li
+                    a.dropdown-item(href='/database1') Database1
+                  li
+                    a.dropdown-item(href='/database2') Database2
+              li.nav-item
+                a.nav-link(href='/camera') Video Surveillance
+            a(href='/logout')
+              button.btn.btn-success.position-absolute.top-50.end-0.translate-middle(type = 'button')
+                | &nbsp Exit &nbsp &nbsp &nbsp
+    .toolbar(style='padding: 10px;background-color: #f0f0f0; border-bottom: 1px solid #ccc;display: flex;justify-content: space-around')
+      .tool(draggable="true" id="node-template" style='cursor: grab;padding: 5px; background-color: #ddd; margin-right: 5px; cursor: pointer;border: 1px solid #999;margin-left: 100px;margin-top:7rem') node-template
+    .canvas(id="canvas2" style=' width: 80%; height: 600px; background-color: #fafafa;position: relative;border: 1px solid #ccc;margin-left: 100px;margin-top:20rem')
+
+
+
+
+
+
+    //canvas元素，绘制化学流程图
+    .container.CanvasContainer
+      //- canvas#tutorial(width='1000' height='570')   
+      canvas#tutorial(width='1000' height='740')     
+        
+    //系统参数界面
+    .container.SysParam_CardContainer
+      .card.bg-dark.text-white.SysParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px; background-color:rgb(61,64,77)")
+          | Real-time system monitoring 
+        .card-body.text-center(style="font-size:15px; font-weight:bold;") 
+          label
+            span.SysParamName Bus voltage：
+            span#SysParamVal_1 
+            span V&nbsp&nbsp&nbsp
+            span.SysParamName Bus current：
+            span#SysParamVal_2
+            span A&nbsp&nbsp&nbsp
+          br
+          label 
+            span.SysParamName  System power：
+            span#SysParamVal_3 
+            span W&nbsp&nbsp&nbsp
+            span.SysParamName  System state：
+            span#SysParamVal_4 
+
+          //- .Param_container(style="font-size:15px; text-shadow: none")
+          //-   span.SysParamName 总线电压：
+          //-   span#SysParamVal_1 数值1
+          //-   span V
+          //-   span 
+          //-   span
+          //-   span
+          //-   span.SysParamName 系统状态：
+          //-   span#SysParamVal_2 数值2
+            //- span 单位2
+          //- .Param_container(style="font-size:15px; text-shadow: none")
+          //-   span.SysParamName 参数3：
+          //-   span#SysParamVal_3 数值3
+          //-   span 单位3
+          //-   span 
+          //-   span
+          //-   span
+          //-   span.SysParamName 参数4：
+          //-   span#SysParamVal_4 数值4
+          //-   span 单位4
+          //- .Param_container(style="font-size:15px; text-shadow: none")
+          //-   span.SysParamName 参数5：
+          //-   span#SysParamVal_5 数值5
+          //-   span 单位5
+          //-   span 
+          //-   span
+          //-   span
+          //-   span.SysParamName 参数6：
+          //-   span#SysParamVal_6 数值6
+          //-   span 单位6 
+
+    // 模式选择按钮组
+    #ChooseModeBtn.container.SettingBtnsContainer(style='display:none;') 
+      .SettingBtns
+        span(style='color:white; font-weight:bold;')
+          | Please select the experimental mode&nbsp&nbsp&nbsp&nbsp
+        br
+        .btn-group.btn-group-lg(role='group' aria-label='Basic mixed styles example 2' style='width:25rem;')
+          button#StartSysBtns_9.btn.btn-primary(type='button' onclick='ChooseMode_Disp("自动模式")') Automatic Mode 
+          button#StartSysBtns_10.btn.btn-danger(type='button' onclick='ChooseMode_Disp("手动模式")') Manual Mode 
+
+
+    // 自动模式按钮组
+    #AutoProcBtn.container.SettingBtnsContainer(style='display:none;')
+      .SettingBtns.vertical-buttons
+        span(style='color:white; font-weight:bold;') 
+          | Automatic Mode：
+        .btn-group.btn-group(role='group' aria-label='Basic mixed styles example 1' style='width:25rem; font-family: "黑体", sans-serif;')
+          button#StartSysBtns_1.btn.btn-success(type='button' onclick='TopologyDetection()' data-bs-toggle='modal' data-bs-target='#TopologyDetectionModal') Topology Detection
+          //- button#StartSysBtns_2.btn.btn-warning(type='button' style='color:white;') 下载配方
+          button#StartSysBtns_2.btn.btn-primary(type='button' onclick='StartAutoExp()') Start
+          button#StartSysBtns_3.btn.btn-warning(type='button' style='color:white;' onclick='StartCleanFunc("自动模式")') Clean
+        .btn-group.btn-group(role='group' aria-label='Basic mixed styles example 1' style='width:25rem; font-family: "黑体", sans-serif;')
+          button#StartSysBtns_4.btn.btn-danger(type='button' style='color:white;' onclick='UrgentStopFunc()') Stop
+          button#StartSysBtns_5.btn.btn-secondary(type='button' onclick = 'ExitAutoExp()') Exit Automatic Mode
+
+    // 手动模式按钮组
+    #ManuProcBtn.container.SettingBtnsContainer(style='display:none; font-size:15px;') 
+      .SettingBtns
+        span(style='color:white; font-weight:bold;')
+          | Manual Mode：
+        br
+        .btn-group.btn-group-lg(role='group' aria-label='Basic mixed styles example 2' style='width:25rem;')
+          button#StartSysBtns_6.btn.btn-primary(type='button' onclick='ManuModeInit()') System Initialization
+          button#StartSysBtns_7.btn.btn-warning(type='button' onclick='StartCleanFunc("手动模式")' style='color:white;') Clean
+          button#StartSysBtns_8.btn.btn-danger(type='button' onclick='ExitManuProc()') Exit Manual Mode 
+          
+    
+    // 
+    //拓扑检测功能弹窗
+    #TopologyDetectionModal.modal.fade(tabindex='-1' aria-labelledby='TopologyDetectionModal' aria-hidden='true' )
+      .modal-dialog.modal-dialog-centered
+        .modal-content.bg-dark(style='width:800px;')
+          // 模态框头部
+          .modal-header(style='color:white;')
+            h5#videoModalLabel.modal-title Topology Detection
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close') 
+          // 模态框主体
+          .modal-body.text-center
+            //canvas绘制opencv处理过的摄像头画面
+            canvas#CanvasOpencv_1(width='700' height='300')
+            br
+            canvas#CanvasOpencv_2(width='700' height='300')
+            br
+            button.btn.btn-primary(type='button' onclick='StartOpencvDetect()') Start Detection
+            
+          // 模态框底部
+          .modal-footer(style='font-size:10px; color:gray' )
+            | This function detects whether the actual device topology is consistent with the topology generated by AI through the camera.
+
+    // ################################################################################
+    // ----------------------  设置所选器件的参数 begin ---------------------------------
+    #ChemElem_Card1.container.ChemElemParam_CardContainer(style='display:block')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | Substrate 1
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子.jpg' alt='底物1实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem1cb_show(style="display:block;")
+            #ChemElem1.showCardBodycontainer(style='margin-left:4rem;')
+              label
+                span Blue bottle：
+                span#ChemElem1_Val1 
+                span Residual：
+                span#ChemElem1_Val2 
+                span ml
+              label
+                span Green bottle：
+                span#ChemElem1_Val3 
+                span Residual：
+                span#ChemElem1_Val4 
+                span ml
+              label
+                span Red bottle：
+                span#ChemElem1_Val5 
+                span Residual：：
+                span#ChemElem1_Val6 
+                span ml  
+            button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('1')" style='margin-bottom:0px') Parameter Setting
+          #elem1cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span Blue Bottle Reagent：
+                input#ChemElem1_Name1(type='text' name='ChemElem1_Name1' placeholder='Reagent' style='width:60%')
+              label 
+                span Blue Bottle Content：
+                input#ChemElem1_Capacity1(type='number' name='ChemElem1_Capacity1' placeholder='蓝瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span Green Bottle Reagent：
+                input#ChemElem1_Name2(type='text' name='ChemElem1_Name2' placeholder='绿瓶试剂名称' style='width:60%')
+              label 
+                span Green Bottle Content：
+                input#ChemElem1_Capacity2(type='number' name='ChemElem1_Capacity2' placeholder='绿瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span Red Bottle Reagent：
+                input#ChemElem1_Name3(type='text' name='ChemElem1_Name3' placeholder='红瓶试剂名称' style='width:60%')
+              label 
+                span Red Bottle Content：
+                input#ChemElem1_Capacity3(type='number' name='ChemElem1_Capacity3' placeholder='红瓶试剂体积' style='width:60%')
+                span ml
+              
+
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('1')") &nbsp&nbsp Save &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp Cancel &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | After configuring the parameters, proceed to click on Save
+
+    #ChemElem_Card2.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | Substrate 2
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子.jpg' alt='底物2实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem2cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:4rem;')
+              label
+                span Blue bottle：
+                span#ChemElem2_Val1 
+                span Residual：
+                span#ChemElem2_Val2 
+                span ml
+              label
+                span 绿瓶：
+                span#ChemElem2_Val3 
+                span Residual：
+                span#ChemElem2_Val4 
+                span ml
+              label
+                span 红瓶：
+                span#ChemElem2_Val5 
+                span Residual：
+                span#ChemElem2_Val6 
+                span ml  
+            button#elem2_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('2')" style='margin-bottom:0px') 参数设置
+          #elem2cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                  span 蓝瓶试剂：
+                  input#ChemElem2_Name1(type='text' name='ChemElem2_Name1' placeholder='Reagent' style='width:60%')
+                label 
+                  span 蓝瓶容量：
+                  input#ChemElem2_Capacity1(type='number' name='ChemElem2_Capacity1' placeholder='蓝瓶试剂体积' style='width:60%')
+                  span ml
+                label
+                  span 绿瓶试剂：
+                  input#ChemElem2_Name2(type='text' name='ChemElem2_Name2' placeholder='绿瓶试剂名称' style='width:60%')
+                label 
+                  span 绿瓶容量：
+                  input#ChemElem2_Capacity2(type='number' name='ChemElem2_Capacity2' placeholder='绿瓶试剂体积' style='width:60%')
+                  span ml
+                label
+                  span 红瓶试剂：
+                  input#ChemElem2_Name3(type='text' name='ChemElem2_Name3' placeholder='红瓶试剂名称' style='width:60%')
+                label 
+                  span 红瓶容量：
+                  input#ChemElem2_Capacity3(type='number' name='ChemElem2_Capacity3' placeholder='红瓶试剂体积' style='width:60%')
+                  span ml
+
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('2')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card3.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 泵1
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/泵.jpg' alt='泵1实物图' style="width: 112px; height: 200px; margin-top:10px" )
+        .card-body.text-center(style="font-size:15px;") 
+          #elem3cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              //.Param_container
+              label
+                span 流速：
+                span#ChemElem3_Val1 
+                span μl/min
+              //.Param_container
+              label
+                span 通道：
+                span#ChemElem3_Val2 
+                //span 单位2 
+              label
+                span 状态：
+                span#ChemElem3_Val3 
+                // span 单位2  
+            button#elem3_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('3')" style='margin-bottom:0px') 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem3_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button' onclick='manuStop(3)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp         
+            //- //- 串口输入输出框
+            //- .uartContainer#uartContainer(style='display:block;')
+            //-   .uartInput
+            //-     input(type='text' placeholder='输入指令' style='width:17rem; font-size:17px; border: 1px solid #CCC; border-radius:4px;')
+            //-     button.btn.btn-sm.btn-outline-secondary(style='width:3rem;') 发送
+            //-     br
+            //-     label(style='width:20rem; font-size:17px; color:#757575;')
+          #elem3cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 流速: &nbsp&nbsp
+                input#ChemElem3_Velocity(type='number' name='ChemElem3_Velocity' placeholder='最小分辨率为--待修改' style='width:47%') 
+                select(name='ChemElem3_SpeedUnit' style='width:20%')
+                  option(value=0) μl/min
+                  option(value=1) ml/min
+              label
+                span 通道：
+                select#ChemElem3_Channels(name='ChemElem3_Channels') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+              label
+                span 状态：
+                select#ChemElem3_Status(name='ChemElem3_Status')
+                  option(value=0) 吸取
+                  option(value=1) 注射
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('3')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+    
+    #ChemElem_Card4.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 泵2
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/泵.jpg' alt='泵2实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem4cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              //.Param_container
+              label
+                span 流速：
+                span#ChemElem4_Val1 
+                span μl/min
+              //.Param_container
+              label
+                span 通道：
+                span#ChemElem4_Val2 
+                //span 单位2
+              //- 吸取/注射
+              .Param_container  
+                span 状态：
+                span#ChemElem4_Val3 
+                // span 单位2  
+            button#elem4_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('4')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem4_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button'  onclick='manuStop(4)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem4cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 流速: &nbsp&nbsp
+                input#ChemElem4_Velocity(type='number' name='ChemElem4_Velocity' placeholder='最小分辨率为--待修改' style='width:47%') 
+                select#ChemElem4_SpeedUnit(name='ChemElem4_SpeedUnit' style='width:20%')
+                  option(value=0) μl/min
+                  option(value=1) ml/min
+              label
+                span 通道：
+                select#ChemElem4_Channels(name='ChemElem4_Channels') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+              label
+                span 状态：
+                select#ChemElem4_Status(name='ChemElem4_Status')
+                  option(value=0) 吸取
+                  option(value=1) 注射
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('4')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card5.container.ChemElemParam_CardContainer(style='display:none') 
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 芯片
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/芯片.jpg' alt='5号实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem5cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              label
+                  span 容量：
+                  span#ChemElem5_Val1 
+                  span ml
+              //- label
+              //-   span 温度：
+              //-   span#ChemElem5_Val1 数值1
+              //-   span ℃
+              //- label
+              //-   span 阈值：
+              //-   span#ChemElem5_Val2 数值2
+              //-   span ℃
+              
+            button#elem5_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('5')") 参数设置
+            //- //- 手动模式按钮
+            //- .btn-group.btn-group-sm#ChemElem5_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+            //-   button.btn.btn-success(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+            //-   button.btn.btn-warning(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem5cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 容量：
+                input#ChemElem5_Capacity(type='number' name='ChemElem5_Capacity' placeholder='芯片容量规格' style='width:68%')
+                span ml
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('5')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card6.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | waste
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子2.jpg' alt='waste收集瓶实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem6cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:9rem;")
+              label
+                span 试剂：
+                span#ChemElem6_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem6_Val2 数值2
+              //-   span ml
+            button#elem6_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('6')") 参数设置
+          #elem6cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 试剂名称：
+                input#ChemElem6_Name(type='text' name='ChemElem6_Name' placeholder='试剂名称' style='width:60%')
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('6')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card7.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 六通切换阀1
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/切换阀.jpg' alt='六通切换阀1实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem7cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              label
+                span 输出通道：
+                span#ChemElem7_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem8_Val2 数值2
+              //-   span ml
+            button#elem7_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('7')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem7_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' onclick='manuStart(7)' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button' onclick='manuStop(7)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem7cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 通道选择：
+                select#ChemElem7_Channels(name='ChemElem7_Channels' style='width:60%') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('7')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card8.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 储液瓶
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子.jpg' alt='储液瓶1实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem8cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:4rem;')
+              label
+                span Blue bottle：
+                span#ChemElem8_Val1 
+                span Residual：
+                span#ChemElem8_Val2 
+                span ml
+              label
+                span 绿瓶：
+                span#ChemElem8_Val3 
+                span Residual：
+                span#ChemElem8_Val4 
+                span ml
+              label
+                span 红瓶：
+                span#ChemElem8_Val5 
+                span Residual：
+                span#ChemElem8_Val6 
+                span ml  
+            button#elem8_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('8')") 参数设置
+          #elem8cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 蓝瓶试剂：
+                input#ChemElem8_Name1(type='text' name='ChemElem8_Name1' placeholder='Reagent' style='width:60%')
+              label 
+                span 蓝瓶含量：
+                input#ChemElem8_Capacity1(type='number' name='ChemElem8_Capacity1' placeholder='蓝瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 绿瓶试剂：
+                input#ChemElem8_Name2(type='text' name='ChemElem8_Name2' placeholder='绿瓶试剂名称' style='width:60%')
+              label 
+                span 绿瓶含量：
+                input#ChemElem8_Capacity2(type='number' name='ChemElem8_Capacity2' placeholder='绿瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 红瓶试剂：
+                input#ChemElem8_Name3(type='text' name='ChemElem8_Name3' placeholder='红瓶试剂名称' style='width:60%')
+              label 
+                span 红瓶含量：
+                input#ChemElem8_Capacity3(type='number' name='ChemElem8_Capacity3' placeholder='红瓶试剂体积' style='width:60%')
+                span ml
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('8')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card9.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 泵3
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/泵.jpg' alt='泵3实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem9cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              //.Param_container
+              label
+                span 流速：
+                span#ChemElem9_Val1 
+                span μl/min
+              //.Param_container
+              label
+                span 通道：
+                span#ChemElem9_Val2 
+                //span 单位2
+              //- 吸取/注射
+              .Param_container  
+                span 状态：
+                span#ChemElem9_Val3 
+                // span 单位2  
+            button#elem9_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('9')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem9_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button'  onclick='manuStop(9)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem9cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 流速: &nbsp&nbsp
+                input#ChemElem9_Velocity(type='number' name='ChemElem9_Velocity' placeholder='最小分辨率为--待修改' style='width:47%') 
+                select#ChemElem9_SpeedUnit(name='ChemElem9_SpeedUnit' style='width:20%')
+                  option(value=0) μl/min
+                  option(value=1) ml/min
+              label
+                span 通道：
+                select#ChemElem9_Channels(name='ChemElem9_Channels') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+              label
+                span 状态：
+                select#ChemElem9_Status(name='ChemElem9_Status')
+                  option(value=0) 吸取
+                  option(value=1) 注射
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('9')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card10.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 泵4
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/泵.jpg' alt='泵4实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem10cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              //.Param_container
+              label
+                span 流速：
+                span#ChemElem10_Val1 
+                span μl/min
+              //.Param_container
+              label
+                span 通道：
+                span#ChemElem10_Val2 
+                //span 单位2
+              //- 吸取/注射
+              .Param_container  
+                span 状态：
+                span#ChemElem10_Val3 
+                // span 单位2  
+            button#elem10_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('10')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem10_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button'  onclick='manuStop(10)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem10cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 流速: &nbsp&nbsp
+                input#ChemElem10_Velocity(type='number' name='ChemElem10_Velocity' placeholder='最小分辨率为--待修改' style='width:47%') 
+                select#ChemElem10_SpeedUnit(name='ChemElem10_SpeedUnit' style='width:20%')
+                  option(value=0) μl/min
+                  option(value=1) ml/min
+              label
+                span 通道：
+                select#ChemElem10_Channels(name='ChemElem10_Channels') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+              label
+                span 状态：
+                select#ChemElem10_Status(name='ChemElem10_Status')
+                  option(value=0) 吸取
+                  option(value=1) 注射
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('10')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card11.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | Substrate 4
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子.jpg' alt='实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem11cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:4rem;')
+              label
+                span Blue bottle：
+                span#ChemElem11_Val1 
+                span Residual：
+                span#ChemElem11_Val2 
+                span ml
+              label
+                span 绿瓶：
+                span#ChemElem11_Val3 
+                span Residual：
+                span#ChemElem11_Val4 
+                span ml
+              label
+                span 红瓶：
+                span#ChemElem11_Val5 
+                span Residual：
+                span#ChemElem11_Val6 
+                span ml  
+            button#elem11_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('11')") 参数设置
+          #elem11cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 蓝瓶试剂：
+                input#ChemElem11_Name1(type='text' name='ChemElem11_Name1' placeholder='Reagent' style='width:60%')
+              label 
+                span 蓝瓶含量：
+                input#ChemElem11_Capacity1(type='number' name='ChemElem11_Capacity1' placeholder='蓝瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 绿瓶试剂：
+                input#ChemElem11_Name2(type='text' name='ChemElem11_Name2' placeholder='绿瓶试剂名称' style='width:60%')
+              label 
+                span 绿瓶含量：
+                input#ChemElem11_Capacity2(type='number' name='ChemElem11_Capacity2' placeholder='绿瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 红瓶试剂：
+                input#ChemElem11_Name3(type='text' name='ChemElem11_Name3' placeholder='红瓶试剂名称' style='width:60%')
+              label 
+                span 红瓶含量：
+                input#ChemElem11_Capacity3(type='number' name='ChemElem11_Capacity3' placeholder='红瓶试剂体积' style='width:60%')
+                span ml
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('11')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    
+
+    #ChemElem_Card12.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 加热芯片组1
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/加热芯片组.jpg' alt='实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:10px;") 
+          #elem12cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:4rem;')
+              label 
+                  span 容量：
+                  span#ChemElem12_Val1 
+                  span ml&nbsp&nbsp 
+                  span 警报阈值：
+                  span#ChemElem12_Val6 
+                  span ℃
+              label
+                span 芯片1温度：
+                span#ChemElem12_Val2 
+                span ℃&nbsp&nbsp-- 
+                span#ChemElem12_Val7 
+                span ℃
+              label
+                span 芯片2温度：
+                span#ChemElem12_Val4 
+                span ℃&nbsp&nbsp-- 
+                span#ChemElem12_Val8 
+                span ℃
+              label
+                span 加热速度：
+                span#ChemElem12_Val3 
+                span 档&nbsp&nbsp&nbsp,
+                span#ChemElem12_Val5 
+                span 档
+              //- label
+              //-   span 警报阈值：
+              //-   span#ChemElem12_Val6 
+              //-   span ℃
+              
+            button#elem12_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('12')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem12_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' onclick='manuStart(12)' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button'  onclick='manuStop(12)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+
+          #elem12cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 容量：
+                input#ChemElem12_Capacity(type='number' name='ChemElem12_Capacity' placeholder='芯片组总容量规格' style='width:68%')
+                span ml
+              label
+                span 芯片1温度: &nbsp&nbsp
+                input#ChemElem12_Temp1(type='number' name='ChemElem12_Temp1' placeholder='芯片1预定加热温度')
+                span ℃
+              label
+                span 加热速度： 
+                input#ChemElem12_HeatingRate1_Slider(type='range' name='ChemElem12_HeatingRate1' min='1' max='10' value='5' style='width:60%')
+                span#ChemElem12_HeatingRate1_Val
+              br
+              label
+                span 芯片2温度: &nbsp&nbsp
+                input#ChemElem12_Temp2(type='number' name='ChemElem12_Temp2' placeholder='芯片2预定加热温度')
+                span ℃
+              label
+                span 加热速度： 
+                input#ChemElem12_HeatingRate2_Slider(type='range' name='ChemElem12_HeatingRate2' min='1' max='10' value='5' style='width:60%')
+                span#ChemElem12_HeatingRate2_Val
+              br
+              label
+                span 阈值: &nbsp&nbsp
+                input#ChemElem12_Threshold(type='number' name='ChemElem12_Threshold' placeholder='超过阈值报警' style='width:68%')
+                span ℃
+               
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('12')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card13.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 压力传感器与背压阀-1
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/压力传感器.jpg' alt='压力传感器与背压阀实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem13cb_show(style="display:block;")
+            .showCardBodycontainer
+              label
+                span 压力：
+                span#ChemElem13_Val1 
+                span mbar
+              label
+                span 阈值：
+                span#ChemElem13_Val2 
+                span mbar
+            button#elem13_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('13')") 参数设置
+          #elem13cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 阈值: &nbsp&nbsp
+                input#ChemElem13_Threshold(type='number' name='ChemElem13_Threshold' placeholder='69mbar~7000mbar')
+                span mbar
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('13')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card14.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 液液分离装置
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/液液分离装置.jpg' alt='液液分离装置实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem14cb_show.card-body.content(style="display:block;")
+            .showCardBodycontainer
+              label
+                span Zaiput液液分离装置
+                //- span#ChemElem13_Val1 
+            button#elem14_SetBtn.btn.btn-sm.btn-primary.disabled(onclick="SetElemParam('14')") 参数设置
+          #elem14cb_set.card-body.content(style="display:none; ") 
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('14')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card15.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 泵5
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/泵.jpg' alt='泵6实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem15cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              //.Param_container
+              label
+                span 流速：
+                span#ChemElem15_Val1 
+                span μl/min
+              //.Param_container
+              label
+                span 通道：
+                span#ChemElem15_Val2 
+                //span 单位2
+              //- 吸取/注射
+              .Param_container  
+                span 状态：
+                span#ChemElem15_Val3 
+                // span 单位2  
+            button#elem15_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('15')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem15_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button' onclick='manuStop(15)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem15cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 流速: &nbsp&nbsp
+                input#ChemElem15_Velocity(type='number' name='ChemElem15_Velocity' placeholder='最小分辨率为--待修改' style='width:47%') 
+                select#ChemElem15_SpeedUnit(name='ChemElem15_SpeedUnit' style='width:20%')
+                  option(value=0) μl/min
+                  option(value=1) ml/min
+              label
+                span 通道：
+                select#ChemElem15_Channels(name='ChemElem15_Channels') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+              label
+                span 状态：
+                select#ChemElem15_Status(name='ChemElem15_Status')
+                  option(value=0) 吸取
+                  option(value=1) 注射
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('15')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card16.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | Substrate 5
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子.jpg' alt='水相实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem16cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:4rem;')
+              label
+                span Blue bottle：
+                span#ChemElem16_Val1 
+                span Residual：
+                span#ChemElem16_Val2 
+                span ml
+              label
+                span 绿瓶：
+                span#ChemElem16_Val3 
+                span Residual：
+                span#ChemElem16_Val4 
+                span ml
+              label
+                span 红瓶：
+                span#ChemElem16_Val5 
+                span Residual：
+                span#ChemElem16_Val6 
+                span ml  
+            button#elem16_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('16')") 参数设置
+          #elem16cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 蓝瓶试剂：
+                input#ChemElem16_Name1(type='text' name='ChemElem16_Name1' placeholder='Reagent' style='width:60%')
+              label 
+                span 蓝瓶含量：
+                input#ChemElem16_Capacity1(type='number' name='ChemElem16_Capacity1' placeholder='蓝瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 绿瓶试剂：
+                input#ChemElem16_Name2(type='text' name='ChemElem16_Name2' placeholder='绿瓶试剂名称' style='width:60%')
+              label 
+                span 绿瓶含量：
+                input#ChemElem16_Capacity2(type='number' name='ChemElem16_Capacity2' placeholder='绿瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 红瓶试剂：
+                input#ChemElem16_Name3(type='text' name='ChemElem16_Name3' placeholder='红瓶试剂名称' style='width:60%')
+              label 
+                span 红瓶含量：
+                input#ChemElem16_Capacity3(type='number' name='ChemElem16_Capacity3' placeholder='红瓶试剂体积' style='width:60%')
+                span ml
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('16')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card17.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 泵6
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/泵.jpg' alt='泵7实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem17cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              //.Param_container
+              label
+                span 流速：
+                span#ChemElem17_Val1 
+                span μl/min
+              //.Param_container
+              label
+                span 通道：
+                span#ChemElem17_Val2 
+                //span 单位2
+              //- 吸取/注射
+              .Param_container  
+                span 状态：
+                span#ChemElem17_Val3 
+                // span 单位2  
+            button#elem17_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('17')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem17_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button' onclick='manuStop(17)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem17cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 流速: &nbsp&nbsp
+                input#ChemElem17_Velocity(type='number' name='ChemElem17_Velocity' placeholder='最小分辨率为--待修改' style='width:47%') 
+                select#ChemElem17_SpeedUnit(name='ChemElem17_SpeedUnit' style='width:20%')
+                  option(value=0) μl/min
+                  option(value=1) ml/min
+              label
+                span 通道：
+                select#ChemElem17_Channels(name='ChemElem17_Channels') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+              label
+                span 状态：
+                select#ChemElem17_Status(name='ChemElem17_Status')
+                  option(value=0) 吸取
+                  option(value=1) 注射
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('17')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card18.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | Substrate 6
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子.jpg' alt='有机相实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem18cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:4rem;')
+              label
+                span Blue bottle：
+                span#ChemElem18_Val1 
+                span Residual：
+                span#ChemElem18_Val2 
+                span ml
+              label
+                span 绿瓶：
+                span#ChemElem18_Val3 
+                span Residual：
+                span#ChemElem18_Val4 
+                span ml
+              label
+                span 红瓶：
+                span#ChemElem18_Val5 
+                span Residual：
+                span#ChemElem18_Val6 
+                span ml  
+            button#elem18_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('18')") 参数设置
+          #elem18cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 蓝瓶试剂：
+                input#ChemElem18_Name1(type='text' name='ChemElem18_Name1' placeholder='Reagent' style='width:60%')
+              label 
+                span 蓝瓶含量：
+                input#ChemElem18_Capacity1(type='number' name='ChemElem18_Capacity1' placeholder='蓝瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 绿瓶试剂：
+                input#ChemElem18_Name2(type='text' name='ChemElem18_Name2' placeholder='绿瓶试剂名称' style='width:60%')
+              label 
+                span 绿瓶含量：
+                input#ChemElem18_Capacity2(type='number' name='ChemElem18_Capacity2' placeholder='绿瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 红瓶试剂：
+                input#ChemElem18_Name3(type='text' name='ChemElem18_Name3' placeholder='红瓶试剂名称' style='width:60%')
+              label 
+                span 红瓶含量：
+                input#ChemElem18_Capacity3(type='number' name='ChemElem18_Capacity3' placeholder='红瓶试剂体积' style='width:60%')
+                span ml
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('18')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card19.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 水相
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子2.jpg' alt='水相实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem19cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:9rem;")
+              label
+                span 试剂：
+                span#ChemElem19_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem8_Val2 数值2
+              //-   span ml
+            button#elem19_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('19')") 参数设置
+          #elem19cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 试剂名称：
+                input#ChemElem19_Name(type='text' name='ChemElem19_Name' placeholder='试剂名称' style='width:60%')
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('19')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card20.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 六通切换阀2
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/切换阀.jpg' alt='六通切换阀实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem20cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              label
+                span 输出通道：
+                span#ChemElem20_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem8_Val2 数值2
+              //-   span ml
+            button#elem20_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('20')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem20_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' onclick='manuStart(20)' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button' onclick='manuStop(20)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem20cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 通道选择：
+                select#ChemElem20_Channels(name='ChemElem20_Channels' style='width:60%') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('20')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card21.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | waste
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子2.jpg' alt='waste实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem21cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:9rem;")
+              label
+                span 试剂：
+                span#ChemElem21_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem8_Val2 数值2
+              //-   span ml
+            button#elem21_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('21')") 参数设置
+          #elem21cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 试剂名称：
+                input#ChemElem21_Name(type='text' name='ChemElem21_Name' placeholder='试剂名称' style='width:60%')
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('21')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card22.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 有机相
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子2.jpg' alt='利多卡因实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem22cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:9rem;')
+              label
+                span 试剂：
+                span#ChemElem22_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem8_Val2 数值2
+              //-   span ml
+            button#elem22_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('22')") 参数设置
+          #elem22cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 试剂名称：
+                input#ChemElem22_Name(type='text' name='ChemElem22_Name' placeholder='试剂名称' style='width:60%')
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('22')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card23.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 加热芯片组2
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/加热芯片组.jpg' alt='芯片实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem23cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:4rem;')
+              label 
+                span 容量：
+                span#ChemElem23_Val1 
+                span ml&nbsp&nbsp 
+                span 警报阈值：
+                span#ChemElem23_Val6 
+                span ℃
+              label
+                span 芯片1温度：
+                span#ChemElem23_Val2 
+                span ℃&nbsp&nbsp-- 
+                span#ChemElem23_Val7 
+                span ℃
+              label
+                span 芯片2温度：
+                span#ChemElem23_Val4 
+                span ℃&nbsp&nbsp-- 
+                span#ChemElem23_Val8 
+                span ℃
+              label
+                span 加热速度：
+                span#ChemElem23_Val3 
+                span 档&nbsp&nbsp&nbsp,
+                span#ChemElem23_Val5 
+                span 档
+            button#elem23_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('23')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem23_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' onclick='manuStart(23)' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button' onclick='manuStop(23)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem23cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 容量：
+                input#ChemElem23_Capacity(type='number' name='ChemElem23_Capacity' placeholder='芯片组总容量规格' style='width:68%')
+                span ml
+              label
+                span 芯片1温度: &nbsp&nbsp
+                input#ChemElem23_Temp1(type='number' name='ChemElem23_Temp1' placeholder='芯片1预定加热温度')
+                span ℃
+              label
+                span 加热速度： 
+                input#ChemElem23_HeatingRate1_Slider(type='range' name='ChemElem23_HeatingRate1' min='1' max='10' value='5' style='width:60%')
+                span#ChemElem23_HeatingRate1_Val
+              br
+              label
+                span 芯片2温度: &nbsp&nbsp
+                input#ChemElem23_Temp2(type='number' name='ChemElem23_Temp2' placeholder='芯片2预定加热温度')
+                span ℃
+              label
+                span 加热速度： 
+                input#ChemElem23_HeatingRate2_Slider(type='range' name='ChemElem23_HeatingRate2' min='1' max='10' value='5' style='width:60%')
+                span#ChemElem23_HeatingRate2_Val
+              br
+              label
+                span 阈值: &nbsp&nbsp
+                input#ChemElem23_Threshold(type='number' name='ChemElem23_Threshold' placeholder='超过阈值报警' style='width:68%')
+                span ℃
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('23')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card24.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 泵7
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/泵.jpg' alt='泵5实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem24cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              //.Param_container
+              label
+                span 流速：
+                span#ChemElem24_Val1 
+                span μl/min
+              //.Param_container
+              label
+                span 通道：
+                span#ChemElem24_Val2 
+                //span 单位2
+              //- 吸取/注射
+              .Param_container  
+                span 状态：
+                span#ChemElem24_Val3 
+                // span 单位2  
+            button#elem24_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('24')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem24_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button'  onclick='manuStop(24)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem24cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 流速: &nbsp&nbsp
+                input#ChemElem24_Velocity(type='number' name='ChemElem24_Velocity' placeholder='最小分辨率为--待修改' style='width:47%') 
+                select#ChemElem24_SpeedUnit(name='ChemElem24_SpeedUnit' style='width:20%')
+                  option(value=0) μl/min
+                  option(value=1) ml/min
+              label
+                span 通道：
+                select#ChemElem24_Channels(name='ChemElem24_Channels') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+              label
+                span 状态：
+                select#ChemElem24_Status(name='ChemElem24_Status')
+                  option(value=0) 吸取
+                  option(value=1) 注射
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('24')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card25.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | Substrate 7
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子.jpg' alt='实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem25cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:4rem;')
+              label
+                span Blue bottle：
+                span#ChemElem25_Val1 
+                span Residual：
+                span#ChemElem25_Val2 
+                span ml
+              label
+                span 绿瓶：
+                span#ChemElem25_Val3 
+                span Residual：
+                span#ChemElem25_Val4 
+                span ml
+              label
+                span 红瓶：
+                span#ChemElem25_Val5 
+                span Residual：
+                span#ChemElem25_Val6 
+                span ml  
+            button#elem25_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('25')") 参数设置
+          #elem25cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 蓝瓶试剂：
+                input#ChemElem25_Name1(type='text' name='ChemElem25_Name1' placeholder='Reagent' style='width:60%')
+              label 
+                span 蓝瓶含量：
+                input#ChemElem25_Capacity1(type='number' name='ChemElem25_Capacity1' placeholder='蓝瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 绿瓶试剂：
+                input#ChemElem25_Name2(type='text' name='ChemElem25_Name2' placeholder='绿瓶试剂名称' style='width:60%')
+              label 
+                span 绿瓶含量：
+                input#ChemElem25_Capacity2(type='number' name='ChemElem25_Capacity2' placeholder='绿瓶试剂体积' style='width:60%')
+                span ml
+              label
+                span 红瓶试剂：
+                input#ChemElem25_Name3(type='text' name='ChemElem25_Name3' placeholder='红瓶试剂名称' style='width:60%')
+              label 
+                span 红瓶含量：
+                input#ChemElem25_Capacity3(type='number' name='ChemElem25_Capacity3' placeholder='红瓶试剂体积' style='width:60%')
+                span ml
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('25')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card26.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 压力传感器与背压阀-2
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/压力传感器.jpg' alt='压力传感器与背压阀实物图' style="width: 250px; height: 150px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem26cb_show(style="display:block;")
+            .showCardBodycontainer
+              label
+                span 压力：
+                span#ChemElem26_Val1 
+                span mbar
+              label
+                span 阈值：
+                span#ChemElem26_Val2 
+                span mbar
+            button#elem26_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('26')") 参数设置
+          #elem26cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 阈值: &nbsp&nbsp
+                input#ChemElem26_Threshold(type='number' name='ChemElem26_Threshold' placeholder='69mbar~7000mbar')
+                span mbar
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('26')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card27.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 六通切换阀3
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/切换阀.jpg' alt='六通切换阀实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem27cb_show(style="display:block;")
+            .showCardBodycontainer(style="margin-left:8rem;")
+              label
+                span 输出通道：
+                span#ChemElem27_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem8_Val2 数值2
+              //-   span ml
+            button#elem27_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('27')") 参数设置
+            //- 手动模式按钮
+            .btn-group.btn-group-sm#ChemElem27_ManuBtns(role='group' aria-label='Basic mixed styles example' style='display:none; top:1rem; ')
+              button.btn.btn-success(type='button' onclick='manuStart(27)' style='color:white; font-weight:bold;') &nbsp&nbsp 启动 &nbsp&nbsp
+              button.btn.btn-warning(type='button' onclick='manuStop(27)' style='color:white; font-weight:bold;') &nbsp&nbsp 停止 &nbsp&nbsp
+          #elem27cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label
+                span 通道选择：
+                select#ChemElem27_Channels(name='ChemElem27_Channels' style='width:60%') 
+                  option(value=1) 1
+                  option(value=2) 2
+                  option(value=3) 3
+                  option(value=4) 4
+                  option(value=5) 5
+                  option(value=6) 6
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('27')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card28.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | waste
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子2.jpg' alt='waste实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem28cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:9rem;')
+              label
+                span 试剂：
+                span#ChemElem28_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem8_Val2 数值2
+              //-   span ml
+            button#elem28_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('28')") 参数设置
+          #elem28cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 试剂名称：
+                input#ChemElem28_Name(type='text' name='ChemElem28_Name' placeholder='试剂名称' style='width:60%')
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('28')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    #ChemElem_Card29.container.ChemElemParam_CardContainer(style='display:none')
+      .card.bg-dark.text-white.ChemElemParam_Card(style="width:25rem; ")  
+        .card-header.text-center(style="font-size:20px;  background-color:rgb(61,64,77)")
+          | 地西泮
+        //mx-auto用于将图片居中 
+        .mx-auto
+          img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子2.jpg' alt='地西泮实物图' style="width: 112px; height: 200px; margin-top:10px")
+        .card-body.text-center(style="font-size:15px;") 
+          #elem29cb_show(style="display:block;")
+            .showCardBodycontainer(style='margin-left:8rem;')
+              label
+                span 试剂：
+                span#ChemElem29_Val1 
+              //- label
+              //-   span 含量：
+              //-   span#ChemElem8_Val2 数值2
+              //-   span ml
+            button#elem29_SetBtn.btn.btn-sm.btn-primary(onclick="SetElemParam('29')") 参数设置
+          #elem29cb_set.card-body.content(style="display:none; ") 
+            form.setCardBodyForm(action='',style='text-align:left')
+              label 
+                span 试剂名称：
+                input#ChemElem29_Name(type='text' name='ChemElem29_Name' placeholder='试剂名称' style='width:60%')
+            .btn-group.btn-group-sm(role='group' aria-label='Basic mixed styles example')
+              button.btn.btn-danger(type='button' onclick="SaveElemParam('29')") &nbsp&nbsp 保存 &nbsp&nbsp
+              button.btn.btn-secondary(type='button' onclick="SaveElemParam('0')") &nbsp&nbsp 取消 &nbsp&nbsp
+        .card-footer.text-center(style='font-size:10px; background-color:rgb(61,64,77)')
+          | 参数设置完毕后请点击  保存
+
+    //- 压力和温度曲线
+    div.echartContainer#echartDom
+      div#PressureEchartDom(style='width:32%; height:180px; position:absolute; top:40rem; left:3.6rem;') 
+
+      div#TempretureEchartDom(style='width:32%; height:180px; position:absolute; top:40rem; left:35rem;')
+
+    //- 串口输入输出框
+    .uartContainer#uartContainer(style='display:none;')
+      .uartInput
+        input#uartInput(type='text' placeholder='输入指令' style='width:17rem; font-size:17px; border: 1px solid #CCC; border-radius:4px;')
+        button#uartBtn.btn.btn-sm.btn-outline-secondary(style='width:3rem;' onclick='SendUart()') 发送
+        br
+        label#uartOutput(style='width:20rem; font-size:17px; color:#757575;')
+    // ----------------------  设置所选器件的参数 end ---------------------------------
+    // ################################################################################
+
+
+    #footer.footer.position-fixed.bottom-0.start-50.translate-middle-x
+      //p ECNU & ECUST © 2023 &nbsp;&nbsp;&nbsp; Designed By Xiang and Jiang
+
+
+  script(src="/Lib/bootstrap5/bootstrap.bundle.min.js")
+  script(src="/Lib/jQuery3_7_1/node_modules/jquery/dist/jquery.min.js")
+  script(src="Lib/node_modules/jquery-confirm/js/jquery-confirm.js")
+  script(src="/Lib/echarts-5.3.3/dist/echarts.js")
+  <script async src="/Lib/opencv/opencv-3.4.0.js" onload="openCvReady();"></script>
+  script(src="/javascripts/processingpage_jqueryfunc.js")  
+  script (src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js")
+
+
+  

@@ -1,0 +1,664 @@
+//- xy 此文件对应反应过程框图界面
+
+doctype html
+html
+  head
+    title= processing_page  
+    meta(charset="UTF-8") 
+    meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="renderer" content="webkit") 
+    meta(name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no") 
+    //兼容IE
+    meta(http-equiv="X-UA-Compatible" content="IE=edge" ) 
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8") 
+    meta(http-equiv="Content-Type" content="text/html; charset=gb2312") 
+    meta(name="keywords" content="Highc") 
+    meta(name="description" content="Highcharts") 
+    link(rel="stylesheet" href="/Lib/bootstrap5/bootstrap.min.css")
+    link(rel="stylesheet" href="/Lib/node_modules/jquery-confirm/css/jquery-confirm.css")
+    //- link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/jsplumb.min.css")
+
+    style. 
+      body{
+      background-image: url('/images/bg_lib/bg6.jpg');    
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      //字体颜色大小
+      color: white;                                       
+      font-size: 20px;                                    
+      } 
+      .CanvasContainer{
+        position: absolute;
+        margin-left: 40px;
+        margin-top: 80px;
+        //- position: absolute;
+        //- margin-left: 40px;
+        //- margin-top: 8rem;
+      }
+      //- canvas{
+      //-   border: 1px solid white;                                                                                                                                             
+      //-   display: bolck;
+      //-   background: white;
+      //- }
+      .SysParam_CardContainer{
+        display: relative 
+      }
+      .SysParam_Card{
+        position: absolute;  
+        right: 0;  
+        //- bottom: 3rem;  
+        //- top: 5rem;
+        //- margin-right: 4rem;  
+      }
+      .Param_container{
+        display: flex;
+        align-items: left;
+        //margin-bottom: 10px;
+        //- font-size: 20px;
+        //- text-shadow: 1px 1px 1px #FFF;
+      }
+      .Param_container span{
+        margin-right: 10px;
+      }
+      .SysParamName{
+        //- color: rgb(13,110,253);
+        color:rgb(255, 165, 0) 
+      }
+      .SettingBtns{
+        position: absolute;
+        top: 43rem;
+        right: 0;
+        margin-right: 4rem; 
+      }
+      .SettingBtnsContainer{
+        display:relative
+      }
+      .vertical-buttons {  
+        display: flex;  
+        flex-direction: column;  
+      } 
+      .ChemElemParam_CardContainer{
+        display: relative 
+      }
+      .ChemElemParam_Card{
+        position: absolute;  
+        right: 0;  
+        //- top: 5rem; 
+        top: 14rem;   
+        margin-right: 4rem;  
+      }
+      .showCardBodycontainer{
+        margin-top:0px;
+        margin-left:7rem;
+        margin-bottom:1rem;
+        text-shadow: 1px 1px 1px #FFF;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+      }
+      .showCardBodycontainer label{
+        margin: 0px 0px 1rem;
+        display: flex;
+      }
+      .showCardBodycontainer label>span{
+        float: left;
+        text-align: left;
+        padding-right: 10px;
+        font-size: 15px;
+      }
+      .setCardBodyForm{
+        margin-left:2rem;
+        //padding: 20px 30px 20px 30px;
+        text-shadow: 1px 1px 1px #FFF;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+      }
+      .setCardBodyForm label{
+        margin: 0px 0px 2px;
+        display: flex;
+      }
+      .setCardBodyForm label>span{
+        float: left;
+        text-align: left;
+        padding-right: 10px;
+        font-size: 15px;
+        //margin-top: 10px;
+        // font-weight: bold;
+        // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      .setCardBodyForm input[type="text"], .setCardBodyForm select{
+        border: 1px solid #CCC;
+        color: #888;
+        height: 25px;
+        line-height:15px;
+        margin-bottom: 16px;
+        margin-right: 6px;
+        margin-top: 2px;
+        display: flex;
+        align-items: left;
+        outline: 0 none;
+        padding: 5px 0px 5px 5px;
+        width: 55%;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+      .setCardBodyForm input[type="number"], .setCardBodyForm select{
+        border: 1px solid #CCC;
+        color: #888;
+        height: 25px;
+        line-height:15px;
+        margin-bottom: 16px;
+        margin-right: 6px;
+        margin-top: 2px;
+        display: flex;
+        align-items: left;
+        outline: 0 none;
+        padding: 5px 0px 5px 5px;
+        width: 55%;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      }
+      .setCardBodyForm select {
+        background: #FFF url('down-arrow.png') no-repeat right;
+        background: #FFF url('down-arrow.png') no-repeat right;
+        display: flex;
+        align-items: left;
+        appearance:none;
+        -webkit-appearance:none;
+        -moz-appearance: none;
+        text-indent: 0.01px;
+        text-overflow: '';
+        width: 70%;
+        height: 25px;
+        line-height:15px;
+      }  
+      .echartContainer{
+        display:relative;
+      }
+      .uartContainer{
+        display:felx;
+      }
+      .uartInput{
+        position: absolute;  
+        left: 45rem;  
+        //- bottom: 3rem;  
+        top: 34rem;
+        margin-right: 4rem;
+      }
+      #footer{
+        text-align: center;
+        color: white;
+        font-size: 10px;
+      }
+      .canvas {
+          width: 5000px;
+          height: 3000px;
+          //- border: 1px solid #ccc;
+          position: relative;
+          background-color:	rgb(137,196,244,0.25);
+          //- border: 1px solid #e4f1fe;
+          transform-origin: top left; /* 缩放的原点 */
+          transition: transform 0.1s; /* 平滑缩放效果 */
+          //- opacity: 0.25;
+      }
+      .node {
+          pointer-events: all;
+          z-index:10
+      }
+      //- .node {
+      //-     width: 500px;
+      //-     height: 50px;
+      //-     background-color: white;
+      //-     border: 1px solid #000;
+      //-     position: absolute;
+      //-     text-align: center;
+      //-     line-height: 50px;
+      //-     cursor: move;       
+      //-     transition: transform 0.1s; /* 平滑缩放效果 */
+      //- }
+      .draggable-node {
+        width: 100px;
+        height: 50px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        cursor: grab;      
+      }
+      .column {
+        //- background-color: #aaaabc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      button.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      .highlight {
+            border: 2px solid yellow;
+            box-shadow: 0 0 10px yellow;
+      } 
+      .node-id-label {
+        position: absolute;
+        bottom: -15px; /* 将标签移至节点下方 */
+        left: 50%; /* 水平居中对齐 */
+        transform: translateX(-50%); /* 调整水平居中 */
+        font-size: 8px;
+        color: #fff;
+        background: transparent;
+        padding: 2px 5px;
+        border-radius: 2px;
+        width: 80px; /* 设置宽度控制换行 */
+        text-align: center; /* 文本居中 */
+        word-wrap: break-word; /* 自动换行 */
+        white-space: normal; /* 允许换行 */
+      }
+
+   
+  body
+    // 导航栏
+    div.nav.navbar.navbar-expand-lg.navbar-dark.fixed-top(style='background-color: #366cb4;')    
+        .container-fluid
+          a.navbar-brand(href='#')
+            img.d-inline-block.align-text-center(src='/images/ecnu_logo2.png' alt='' width='30' height='30')
+            |  Totally Automatic Optimist
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSupportedContent.nav-pills.collapse.navbar-collapse       
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0
+              li.nav-item
+                a.nav-link(href='/index') Home
+              li.nav-item
+                a.nav-link(href='/AI') Retrosynthetic Analysis
+              li.nav-item
+                a.nav-link.active(aria-current='page' href='/processing') Run Platform
+              li.nav-item
+                a.nav-link(href='/result') Experimental Results
+              //- 数据库下拉选项
+              li.nav-item.dropdown
+                a#navbarDropdown1.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' role='button' aria-expanded='false') 
+                  | Database
+                ul.dropdown-menu(aria-labelledby='navbarDropdown1')
+                  li
+                    a.dropdown-item(href='/database1') Database1
+                  li
+                    a.dropdown-item(href='/database2') Database2
+              li.nav-item
+                a.nav-link(href='/camera') Video Surveillance
+            a(href='/logout')
+              button.btn.btn-success.position-absolute.top-50.end-0.translate-middle(type = 'button')
+                | &nbsp Exit &nbsp &nbsp &nbsp
+    //- div#container_graph(class='container',style=' display: flex;flex-direction: column;width: 2000px;height: 1000px;margin-top:20px')
+    //- .row1(stye=' display: flex;flex-direction: column;width: 95%;height: 400px;')
+      
+    .row2(style=' display: flex;flex-direction: row; width: 95%;height: 600px;padding: 10px;margin: 0 auto;margin-top:60px')
+      .column1(style='width:10%;margin: 0 auto;')
+        .toolbar(style='margin-top: 4rem;padding: 10px;background-color:rgb(137,196,244,0.25);border: 2px solid #287DD3;display: grid;grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(8, 1fr); row-gap:10px;column-gap: 15px;width:94%;margin: 0 auto;height: 100%; overflow: hidden; justify-content: center;align-items: center;position:relative')
+          .tool(draggable="true" id="pump" style="display: flex; align-items: center; justify-content: center;cursor: grab;width: 25px;height:50px;text-align: center;margin-left: 10px,position:relative") 
+            img(src="/images/Chemical_Instruments/pump.png" alt="pump" title="pump" style="width: 100%; height: 100%; object-fit:contain;object-position: center")
+          .tool(draggable="true" id="valve" style="display: flex; align-items: center; justify-content: center;cursor: grab;width: 25px;height:30px;text-align: center;margin-top: 0px;margin-left: 15px,position:relative") 
+            img(src="/images/Chemical_Instruments/SwitchingValve1.png" alt="Valve" title ="Valve" style="width: 100%; height: 100%; object-fit:contain;object-position: center")
+          .tool(draggable="true" id="chip" style="display: flex; align-items: center; justify-content: center;cursor: grab;width: 50px;height:50px;text-align: center;margin-left: 10px,position:relative") 
+            img(src="/images/Chemical_Instruments/chip.png" alt="chip" title="chip" style="width: 100%; height: 100%; object-fit:contain;object-position: center")
+          .tool(draggable="true" id="heat_chip" style="display: flex; align-items: center; justify-content: center;cursor: grab;width: 50px;height:50px;text-align: center;margin-top: 0px,position:relative") 
+            img(src="/images/Chemical_Instruments/heat chip.png" alt="heat chip" title="heat chip" style="width: 100%; height: 100%; object-fit:contain;object-position: center")
+          .tool(draggable="true" id="bottle" style="display: flex; align-items: center; justify-content: center;cursor: grab;width: 40px;height:40px;text-align: center;margin-left: 15px,position:relative") 
+            img(src="/images/Chemical_Instruments/bottle.png" alt="bottle" title="bottle" style="width: 100%; height: 100%; object-fit:contain;object-position: center")
+          .tool(draggable="true" id="l-l_separator" style="display: flex; align-items: center; justify-content: center;cursor: grab;width: 50px;height:25px;text-align: center;margin-top: 0px,position:relative") 
+            img(src="/images/Chemical_Instruments/Liquid-liquidSeparationDevice1.png" alt="l-l separator" title="l-l separator" style="width: 100%; height: 100%; object-fit:contain;object-position: center")
+          .tool(draggable="true" id="pressure_sensor" style="cursor: grab;width: 50px;height:20px;text-align: center;margin-left: 8px,position:relative,display: flex; align-items: center; justify-content: center;") 
+            img(src="/images/Chemical_Instruments/PressureSensor_BackPressureValve.png" alt="pressure sensor" title="pressure sensor" style="width: 100%; height: 100%; object-fit:contain;object-position: center")
+          .tool(draggable="true" id="T-valve" style="cursor: grab; width: 40px; height: 20px; text-align: center; position:relative; display: flex; align-items: center; justify-content: center;margin-left: 0px") 
+            img(src="/images/Chemical_Instruments/三通3.png" alt="T-valve" title="T-valve" style="max-width: 100%; max-height: 100%; object-fit: contain; object-position: center;")
+
+          
+          //- .tool(draggable="true" id="l-l separator" style="display: block; cursor: grab;width: 50px;height:50px;text-align: center;margin-top: 0px") 
+          //-   img(src="/images/Chemical_Instruments/heat chip.png" alt="heat chip" style="width: 100%; height: 100%; object-fit:contain;")
+
+      .column2(style='width:70%;margin: 0 auto;')
+        #container_canvas(style='position: relative;left: 0px;top: 0;width:100%;height:100%;overflow: hidden;border: 2px solid #287DD3;')
+          .canvas(id="canvas2",style='z-index=-10,position: absolute;')
+          button#clearButton(style="position: absolute; top: 10px; left: 90px;; opacity: 1; cursor: pointer; width: 25px; height: 25px; border: 1px solid black; background-color:rgb(40, 215, 212) ;  display: flex; align-items: center; justify-content: center;" onclick="clearCanvas()" title='Clear'
+          )
+            svg(xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-x-circle" viewBox="0 0 16 16")
+              path(d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z")
+              path(d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z")
+
+          button#saveButton(style="position: absolute; top: 10px; left: 10px;; opacity: 1; cursor: pointer; width: 25px; height: 25px; border: 1px solid black; background-color: #2075df;  display: flex; align-items: center; justify-content: center;" onclick="saveCanvas(0)" title='Save'
+          )
+            svg(xmlns="http://www.w3.org/2000/svg" width='40' height="40" fill="black" class="bi bi-download" viewBox="0 0 16 16")
+              path(d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z")
+              path(d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z")
+          button#uploadButton(style="position: absolute; top: 10px; left: 50px;; opacity: 1; cursor: pointer; width: 25px; height: 25px; border: 1px solid black; background-color: #df8a20;  display: flex; align-items: center; justify-content: center;" onclick="document.getElementById('fileInput').click()" title='Upload'
+          )
+            svg(xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="black" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16")
+              path(d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z")
+              path(d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z")
+          input#fileInput(type="file" style="display: none;" accept=".json" onchange="loadJsonFile(event)")
+          button.btn.btn-success#ManualB(type="button" style="position: absolute; bottom: 10px; right: 10px; opacity: 1; cursor: pointer; width: ; height: 40px; border: ; background-color: ;  display: flex; align-items: center; justify-content: center;" onclick="ChooseMode_Disp('手动模式')" title='Manual Model')
+            svg(xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16")
+              path(fill-rule="evenodd" d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493a.5.5 0 1 0-.858-.514l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z")
+              path(d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z")
+            span(style="font-size:13px; margin-left: 5px") Manual
+          button.btn.btn-danger#AutoB(type="button" style="position: absolute; bottom: 10px; right: 120px; opacity: 1; cursor: pointer; width: 100px; height: 40px; border: ; background-color: ;  display: flex; align-items: center; justify-content: center;" onclick="ChooseMode_Disp('自动模式')" title='Auto Model')
+            svg(xmlns="http://www.w3.org/2000/svg", width="25px", height="25px", fill="currentColor", class="bi bi-android2", viewBox="0 0 16 16")
+              path(d="m10.213 1.471.691-1.26c.046-.083.03-.147-.048-.192-.085-.038-.15-.019-.195.058l-.7 1.27A4.832 4.832 0 0 0 8.005.941c-.688 0-1.34.135-1.956.404l-.7-1.27C5.303 0 5.239-.018 5.154.02c-.078.046-.094.11-.049.193l.691 1.259a4.25 4.25 0 0 0-1.673 1.476A3.697 3.697 0 0 0 3.5 5.02h9c0-.75-.208-1.44-.623-2.072a4.266 4.266 0 0 0-1.664-1.476ZM6.22 3.303a.367.367 0 0 1-.267.11.35.35 0 0 1-.263-.11.366.366 0 0 1-.107-.264.37.37 0 0 1 .107-.265.351.351 0 0 1 .263-.11c.103 0 .193.037.267.11a.36.36 0 0 1 .112.265.36.36 0 0 1-.112.264Zm4.101 0a.351.351 0 0 1-.262.11.366.366 0 0 1-.268-.11.358.358 0 0 1-.112-.264c0-.103.037-.191.112-.265a.367.367 0 0 1 .268-.11c.104 0 .19.037.262.11a.367.367 0 0 1 .107.265c0 .102-.035.19-.107.264ZM3.5 11.77c0 .294.104.544.311.75.208.204.46.307.76.307h.758l.01 2.182c0 .276.097.51.292.703a.961.961 0 0 0 .7.288.973.973 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h1.343v2.182c0 .276.097.51.292.703a.972.972 0 0 0 .71.288.973.973 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h.76c.291 0 .54-.103.749-.308.207-.205.311-.455.311-.75V5.365h-9v6.404Zm10.495-6.587a.983.983 0 0 0-.702.278.91.91 0 0 0-.293.685v4.063c0 .271.098.501.293.69a.97.97 0 0 0 .702.284c.28 0 .517-.095.712-.284a.924.924 0 0 0 .293-.69V6.146a.91.91 0 0 0-.293-.685.995.995 0 0 0-.712-.278Zm-12.702.283a.985.985 0 0 1 .712-.283c.273 0 .507.094.702.283a.913.913 0 0 1 .293.68v4.063a.932.932 0 0 1-.288.69.97.97 0 0 1-.707.284.986.986 0 0 1-.712-.284.924.924 0 0 1-.293-.69V6.146c0-.264.098-.491.293-.68Z")
+            span(style="font-size:13px; margin-left: 5px") Auto
+          #AutoProcBtn.container.SettingBtnsContainer(style='display:none;')
+            dive#robot(style="position: absolute; bottom: 12px; right: 260px;opacity: 1; cursor: pointer; width: 30px; height: 30px; background-color:transparent;  display: flex; align-items: center; justify-content: center;"  title='Auto')
+              svg(xmlns="http://www.w3.org/2000/svg", width="30px", height="30px", fill="white", class="bi bi-android2", viewBox="0 0 16 16")
+                path(d="m10.213 1.471.691-1.26c.046-.083.03-.147-.048-.192-.085-.038-.15-.019-.195.058l-.7 1.27A4.832 4.832 0 0 0 8.005.941c-.688 0-1.34.135-1.956.404l-.7-1.27C5.303 0 5.239-.018 5.154.02c-.078.046-.094.11-.049.193l.691 1.259a4.25 4.25 0 0 0-1.673 1.476A3.697 3.697 0 0 0 3.5 5.02h9c0-.75-.208-1.44-.623-2.072a4.266 4.266 0 0 0-1.664-1.476ZM6.22 3.303a.367.367 0 0 1-.267.11.35.35 0 0 1-.263-.11.366.366 0 0 1-.107-.264.37.37 0 0 1 .107-.265.351.351 0 0 1 .263-.11c.103 0 .193.037.267.11a.36.36 0 0 1 .112.265.36.36 0 0 1-.112.264Zm4.101 0a.351.351 0 0 1-.262.11.366.366 0 0 1-.268-.11.358.358 0 0 1-.112-.264c0-.103.037-.191.112-.265a.367.367 0 0 1 .268-.11c.104 0 .19.037.262.11a.367.367 0 0 1 .107.265c0 .102-.035.19-.107.264ZM3.5 11.77c0 .294.104.544.311.75.208.204.46.307.76.307h.758l.01 2.182c0 .276.097.51.292.703a.961.961 0 0 0 .7.288.973.973 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h1.343v2.182c0 .276.097.51.292.703a.972.972 0 0 0 .71.288.973.973 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h.76c.291 0 .54-.103.749-.308.207-.205.311-.455.311-.75V5.365h-9v6.404Zm10.495-6.587a.983.983 0 0 0-.702.278.91.91 0 0 0-.293.685v4.063c0 .271.098.501.293.69a.97.97 0 0 0 .702.284c.28 0 .517-.095.712-.284a.924.924 0 0 0 .293-.69V6.146a.91.91 0 0 0-.293-.685.995.995 0 0 0-.712-.278Zm-12.702.283a.985.985 0 0 1 .712-.283c.273 0 .507.094.702.283a.913.913 0 0 1 .293.68v4.063a.932.932 0 0 1-.288.69.97.97 0 0 1-.707.284.986.986 0 0 1-.712-.284.924.924 0 0 1-.293-.69V6.146c0-.264.098-.491.293-.68Z")
+            .btn-group.btn-group(role='group' aria-label='Basic mixed styles example 1' style='width:15rem; sans-serif;position: absolute; bottom: 10px; right: 10px;font-size:12px')
+              //- button#StartSysBtns_1.btn.btn-success(type='button' onclick='TopologyDetection()' data-bs-toggle='modal' data-bs-target='#TopologyDetectionModal') Topology Detection
+              button#StartSysBtns_2.btn.btn-primary(type='button' onclick='StartAutoExp()') Start
+              button#StartSysBtns_3.btn.btn-warning(type='button' style='color:white;' onclick='StartCleanFunc("自动模式")') Clean
+                //- .btn-group.btn-group(role='group' aria-label='Basic mixed styles example 1' style='width:25rem; font-family: "黑体", sans-serif;')
+              button#StartSysBtns_4.btn.btn-danger(type='button' style='color:white;' onclick='UrgentStopFunc()') Stop
+              button#StartSysBtns_5.btn.btn-secondary(type='button' onclick = 'ExitAutoExp()') Exit
+          #ManuProcBtn.container.SettingBtnsContainer(style='display:none;') 
+            dive#hand(style="position: absolute; bottom: 13px; right: 230px;opacity: 1; cursor: pointer; width: 35px; height: 35px; background-color:transparent;  display: flex; align-items: center; justify-content: center;"  title='Manual')
+              svg(xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" fill="white" class="bi bi-person-check" viewBox="0 0 16 16")
+                path(fill-rule="evenodd" d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493a.5.5 0 1 0-.858-.514l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z")
+                path(d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z")
+            .btn-group.btn-group(role='group' aria-label='Basic mixed styles example 2' style='width:13rem; sans-serif;position: absolute; bottom: 10px; right: 10px;font-size:12px')
+              button#StartSysBtns_6.btn.btn-primary(type='button' onclick='ManuModeInit()') Initial
+              button#StartSysBtns_7.btn.btn-warning(type='button' onclick='StartCleanFunc("手动模式")' style='color:white;') Clean
+              button#StartSysBtns_8.btn.btn-danger(type='button' onclick='ExitManuProc()') Exit 
+          //- container#trashBin(style="position: absolute; bottom: 10px; left: 10px;; opacity: 1; cursor: pointer; width: 60px; height: 60px; border: 1px solid white; background-color: transparent;  display: flex; align-items: center; justify-content: center;z-index:-0.999"
+          //- )
+          //-   svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16")
+          //-     path(d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z")
+
+      .column3(style='width:20%;margin: 0 auto;')
+        #bottle_card.container.ChemElem_Card(style='position: relative;left: 0px;top: 0;width:97%;height:100%;overflow: hidden;border: 2px solid #287DD3;')
+          .card.text-white.ChemElemParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:20px;  background-color:#2b6ed4")
+              | Bottle
+            .mx-auto
+              img.img-sm.card-img-top(src='/images/Chemical_Instruments/瓶子.jpg' alt='bottole' style="width: 250px; height: 150px; margin-top:10px")
+            .card-body.text-center(style="font-family: 'Open Sans', Arial, sans-serif;font-size:14px;overflow-y: auto;") 
+              #elem1cb_show(style="display:block;")
+                #ChemElem1.showCardBodycontainer(style='margin-left:0rem;')
+                  p(style="display: flex; justify-content: space-between; align-items: center;" )
+                    | Class:
+                    input#class(type="text" value="" style="width: 180px;" placeholder="reagent/reactant/product")
+                  //- p(style="display: flex; justify-content: space-between; align-items: center;")
+                  //-   | Name:
+                  //-   input#name(type="text" value="" style="width: 200px;")
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | ID:
+                    input#id(type="text" value="" style="width: 180px;" placeholder="number")
+                  //- p(style="display: flex; justify-content: space-between; align-items: center;")
+                  //-   | Current Volume (mL):
+                  //-   input#volume(type="number" value="N/A" style="width: 100px;")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | Blue1:
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | Name1:
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="smile etc.")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Residual1(mL):
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="volume")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Concentration1:
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="con.")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | Solvent1:
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="smile etc.")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | red2:
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | Name2:
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Residual2(mL):
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Concentration2:
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | Solvent2:
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | green3:
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | Name3:
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Residual3(mL):
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Concentration3:
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" ) 
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | Solvent3:
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="")
+                //- button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="toggleRunStop()" style='margin-bottom:0px') Run
+        #pump_card.container.ChemElem_Card(style='position: relative;left: 0px;top: 0;width:97%;height:100%;overflow: hidden;border: 2px solid #287DD3;display:none')
+          .card.text-white.ChemElemParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:20px;  background-color:#2b6ed4")
+              | Pump
+            .mx-auto
+              img.img-sm.card-img-top(src='/images/Chemical_Instruments/泵.jpg' alt='pump' style="width: 90%; height: 150px; margin-top:10px")
+            .card-body.text-center(style="font-family: 'Open Sans', Arial, sans-serif;font-size:14px;overflow-y: auto;") 
+              #elem1cb_show(style="display:block;")
+                #ChemElem1.showCardBodycontainer(style='margin-left:0rem;')
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | ID:
+                    input#id(type="text" value="" style="width: 180px;" placeholder="")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Suction1:
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Channel1:
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="1-6")
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | Velocity1(step/s):
+                    input#volume(type="number" value="200" style="width: 180px;" placeholder="")
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | Position1(step):
+                    input#volume(type="number" value="" style="width: 180px;" placeholder="24000step/travel")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | volumn1(mL):
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="5mL/travel")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Injection2:
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | Channel2:
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="1-6")
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | Velocity2(step/s):
+                    input#volume(type="number" value="200" style="width: 180px;" placeholder="")
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | Position2(step):
+                    input#volume(type="number" value="" style="width: 180px;" placeholder="24000step/travel")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | volumn2(mL):
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="5mL/travel")
+                button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="toggleRunStop()" style='margin-bottom:0px') Run     
+        #valve_card.container.ChemElem_Card(style='position: relative;left: 0px;top: 0;width:97%;height:100%;overflow: hidden;border: 2px solid #287DD3;display:none')
+          .card.text-white.ChemElemParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:20px;  background-color:#2b6ed4")
+              | Valve
+            .mx-auto
+              img.img-sm.card-img-top(src='/images/Chemical_Instruments/切换阀.jpg' alt='valve' style="width: 120px; height: 150px; margin-top:10px")
+            .card-body.text-center(style="font-family: 'Open Sans', Arial, sans-serif;font-size:14px;overflow-y: auto;") 
+              #elem1cb_show(style="display:block;")
+                #ChemElem1.showCardBodycontainer(style='margin-left:0rem;')
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | ID:
+                    input#id(type="text" value="" style="width: 180px;" placeholder="")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | inlet channel:
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="1-6")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | outlet channel:
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="1-6")                  
+                button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="toggleRunStop()" style='margin-bottom:0px') Run
+        #heat_chip_card.container.ChemElem_Card(style='position: relative;left: 0px;top: 0;width:97%;height:100%;overflow: hidden;border: 2px solid #287DD3;display:none')
+          .card.text-white.ChemElemParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:20px;  background-color:#2b6ed4")
+              | Heat_chip
+            .mx-auto
+              img.img-sm.card-img-top(src='/images/Chemical_Instruments/加热芯片组.jpg' alt='heat_chip' style="width: 100%; height: 150px; margin-top:10px")
+            .card-body.text-center(style="font-family: 'Open Sans', Arial, sans-serif;font-size:14px;overflow-y: auto;") 
+              #elem1cb_show(style="display:block;")
+                #ChemElem1.showCardBodycontainer(style='margin-left:0rem;')
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | ID:
+                    input#id(type="text" value="" style="width: 180px;" placeholder="")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")
+                    | react temp(℃):
+                    input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="<200℃")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | react time(min):
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="") 
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | heating rate:
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="1-5") 
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | chip volume(mL):
+                    input#ChemElem1_Val2(type="text" value="3.4" style="width: 180px;" placeholder="") 
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | threshold(℃):
+                    input#ChemElem1_Val2(type="text" value="150" style="width: 180px;" placeholder="")                    
+                button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="toggleRunStop()" style='margin-bottom:0px') Run
+        #chip_card.container.ChemElem_Card(style='position: relative;left: 0px;top: 0;width:97%;height:100%;overflow: hidden;border: 2px solid #287DD3;display:none')
+          .card.text-white.ChemElemParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:20px;  background-color:#2b6ed4")
+              | chip
+            .mx-auto
+              img.img-sm.card-img-top(src='/images/Chemical_Instruments/芯片.jpg' alt='chip' style="width: 100%; height: 150px; margin-top:10px")
+            .card-body.text-center(style="font-family: 'Open Sans', Arial, sans-serif;font-size:14px;overflow-y: auto;") 
+              #elem1cb_show(style="display:block;")
+                #ChemElem1.showCardBodycontainer(style='margin-left:0rem;')
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | ID:
+                    input#id(type="text" value="" style="width: 180px;" placeholder="")
+                  //- p(style="display: flex; justify-content: space-between; align-items: center; ")
+                  //-   | react temp. :
+                  //-   input#ChemElem1_Val1(type="text" value="" style="width: 180px;" placeholder="<200℃")
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | react time(min):
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="") 
+                  //- p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                  //-   | heating rate:
+                  //-   input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="") 
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | chip volume(mL):
+                    input#ChemElem1_Val2(type="text" value="0.125" style="width: 180px;" placeholder="")                    
+                //- button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="toggleRunStop()" style='margin-bottom:0px') Run
+        #pressure_sensor_card.container.ChemElem_Card(style='position: relative;left: 0px;top: 0;width:97%;height:100%;overflow: hidden;border: 2px solid #287DD3;display:none')
+          .card.text-white.ChemElemParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:20px;  background-color:#2b6ed4")
+              | Pressure_sensor
+            .mx-auto
+              img.img-sm.card-img-top(src='/images/Chemical_Instruments/压力传感器.jpg' alt='pressoure sensor' style="width: 100%; height: 150px; margin-top:10px")
+            .card-body.text-center(style="font-family: 'Open Sans', Arial, sans-serif;font-size:14px;overflow-y: auto;") 
+              #elem1cb_show(style="display:block;")
+                #ChemElem1.showCardBodycontainer(style='margin-left:0rem;')
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | ID:
+                    input#id(type="text" value="" style="width: 180px;" placeholder="")              
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | pressure(mBar):
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="") 
+                  p(style="display: flex; justify-content: space-between; align-items: center; ")  
+                    | threshhold:
+                    input#ChemElem1_Val2(type="text" value="" style="width: 180px;" placeholder="69mbar~7000mbar")                    
+                //- button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="toggleRunStop()" style='margin-bottom:0px') Run       
+        #l-l_separator_card.container.ChemElem_Card(style='position: relative;left: 0px;top: 0;width:97%;height:100%;overflow: hidden;border: 2px solid #287DD3;display:none')
+          .card.text-white.ChemElemParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:20px;  background-color:#2b6ed4")
+              | l-l_separator
+            .mx-auto
+              img.img-sm.card-img-top(src='/images/Chemical_Instruments/液液分离装置.jpg' alt='l-l separator' style="width: 100%; height: 150px; margin-top:10px")
+            .card-body.text-center(style="font-family: 'Open Sans', Arial, sans-serif;font-size:14px;overflow-y: auto;") 
+              #elem1cb_show(style="display:block;")
+                #ChemElem1.showCardBodycontainer(style='margin-left:0rem;')
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | ID:
+                    input#id(type="text" value="" style="width: 180px;" placeholder="")                             
+                //- button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="toggleRunStop()" style='margin-bottom:0px') Run
+        #T-valve_card.container.ChemElem_Card(style='position: relative;left: 0px;top: 0;width:97%;height:100%;overflow: hidden;border: 2px solid #287DD3;display:none')
+          .card.text-white.ChemElemParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:20px;  background-color:#2b6ed4")
+              | T-valve
+            .mx-auto
+              img.img-sm.card-img-top(src='/images/Chemical_Instruments/三通.jpg' alt='T-valve' style="width: 100%; height: 150px; margin-top:10px")
+            .card-body.text-center(style="font-family: 'Open Sans', Arial, sans-serif;font-size:14px;overflow-y: auto;") 
+              #elem1cb_show(style="display:block;")
+                #ChemElem1.showCardBodycontainer(style='margin-left:0rem;')
+                  p(style="display: flex; justify-content: space-between; align-items: center;")
+                    | ID:
+                    input#id(type="text" value="" style="width: 180px;" placeholder="")                             
+                //- button#elem1_SetBtn.btn.btn-sm.btn-primary(onclick="toggleRunStop()" style='margin-bottom:0px') Run
+    .row3(style=' display: flex;flex-direction: row; width: 93.2%;height: 230px;padding: 0px;margin: 0 auto;margin-top:0px')
+      .column1(style='width:40%;height:100%;margin-top: 0px;padding: 3px;background-color:rgb(137,196,244,0.25);border: 2px solid #287DD3;display: block;')
+        #PressureEchartDom(style='width:100%; height:100%; position:relative;')
+      .column2(style='width:40%;height:100%;margin-top: 0px;padding: 3px;background-color:rgb(137,196,244,0.25);border: 2px solid #287DD3;display: block;')
+        #TempretureEchartDom(style='width:100%; height:100%; position:relative;flex:1') 
+      .column3(style='width:20%;margin: 0 auto;')
+        .container.SysParam_CardContainer(style='position: relative;left: 0px;top: 0;width:100%;height:100%;overflow: hidden;border: 2px solid #287DD3;display:block')
+          .card.text-white.SysParam_Card(style='position: absolute;left: 0px;top: 0;width:100%;height:100%;overflow: hidde;background-color:rgb(137,196,244,0.25)')
+            .card-header.text-center(style="font-size:15px; background-color:rgb(61,64,77)")
+              | Real-time system monitoring 
+            .card-body.text-center(style="font-size:15px; font-weight:;") 
+              label(style="display: flex; justify-content: flex-start; align-items: center;")  
+                span.SysParamName Bus voltage:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                span#SysParamVal_1
+                span &nbspV
+              br
+              label(style="display: flex; justify-content: flex-start; align-items: center;") 
+                span.SysParamName Bus current:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                span#SysParamVal_2
+                span &nbspA
+              br
+              label(style="display: flex; justify-content: flex-start; align-items: center;")  
+                span.SysParamName  System power:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                span#SysParamVal_3 
+                span &nbspW
+              br
+              label(style="display: flex; justify-content: flex-start; align-items: center;")
+                span.SysParamName  System state:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                span#SysParamVal_4                                                                                                           
+      
+
+
+    //- .toolbar(style='margin-top: 10rem;')
+    //-   .tool(draggable="true" id="node-template" ) node-template
+    //- #container_canvas(style='margin-top: 15rem;')
+    //-   .canvas(id="canvas2")
+
+
+
+
+    
+   
+
+    #footer.footer.position-fixed.bottom-0.start-50.translate-middle-x
+      //p ECNU & ECUST © 2023 &nbsp;&nbsp;&nbsp; Designed By Xiang and Jiang
+
+  
+  script(src="/Lib/bootstrap5/bootstrap.bundle.min.js")
+  script(src="/Lib/jQuery3_7_1/node_modules/jquery/dist/jquery.min.js")
+  script(src="Lib/node_modules/jquery-confirm/js/jquery-confirm.js")
+  script(src="/Lib/echarts-5.3.3/dist/echarts.js")
+  <script async src="/Lib/opencv/opencv-3.4.0.js" onload="openCvReady();"></script>
+  //<script src="https://cdn.jsdelivr.net/npm/jsplumb@2.15.6/dist/js/jsplumb.min.js"></script>
+  <script src="Lib/node_modules/jsplumb/dist/js/jsplumb.min.js"></script>
+  script(src="/javascripts/processingpage_jqueryfunc.js")
+  
+ 
+
+
+   
